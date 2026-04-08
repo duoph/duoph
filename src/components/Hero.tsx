@@ -1,6 +1,8 @@
 "use client";
 
+import Link from "next/link";
 import { ArrowRight, Facebook, Instagram, Twitter } from "lucide-react";
+import { FaXTwitter } from "react-icons/fa6";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -57,6 +59,10 @@ const Hero = () => {
         onUpdate: (self) => {
           gsap.to("[data-hero='bg1']", { y: self.progress * 90, duration: 0 });
           gsap.to("[data-hero='bg2']", { y: self.progress * -70, duration: 0 });
+          gsap.to("[data-hero='aurora']", {
+            y: self.progress * 40,
+            duration: 0,
+          });
         },
       });
     }, el);
@@ -78,6 +84,7 @@ const Hero = () => {
           data-hero="bg2"
           className="absolute bottom-1/4 right-[6%] w-[520px] h-[520px] bg-primary/14 rounded-full blur-[140px]"
         />
+        <div data-hero="aurora" className="hero-aurora z-1" />
         <div className="noise pointer-events-none absolute inset-0 opacity-[0.25]" />
         <div className="grid-overlay pointer-events-none absolute inset-0 opacity-[0.2]" />
       </div>
@@ -88,22 +95,24 @@ const Hero = () => {
           className="mt-6 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white px-4 py-2 text-[11px] font-semibold tracking-widest uppercase text-black/60"
         >
           <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_0_6px_rgba(24,112,78,0.18)]" />
-          Business Agency
+          Duoph Technologies
         </div>
 
         <h1
           data-hero="title"
           className="mt-10 text-[68px] leading-[0.9] sm:text-7xl md:text-[80px] font-extrabold tracking-tight text-black"
         >
-          Your Business Deserves <br /> More Than Generic Solutions
+          <span className="text-[#18704e]">Software</span> That Powers. <br />{" "}
+          <span className="text-[#18704e]">Marketing</span> That Grows.
         </h1>
 
         <p
           data-hero="sub"
           className="mt-6 text-sm sm:text-base text-black/60 max-w-2xl"
         >
-          We build powerful software and digital ecosystems that streamline
-          operations, increase visibility, and drive real revenue.
+          Custom applications, scalable systems, and data-driven marketing
+          strategies designed to help you operate smarter, attract customers,
+          and increase revenue.
         </p>
 
         <div
@@ -112,45 +121,37 @@ const Hero = () => {
         >
           <button
             data-hero="cta"
-            className="group inline-flex items-center justify-center gap-3 rounded-xl bg-primary px-7 py-4 text-white font-semibold shadow-[0_18px_60px_rgba(24,112,78,0.22)] hover:-translate-y-px transition"
+            className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#18704E] px-7 py-4 text-white font-semibold shadow-[0_18px_60px_rgba(24,112,78,0.22)] hover:-translate-y-px transition"
           >
             Get Started
-            <span className="inline-flex h-9 w-9 items-center justify-center rounded-lg bg-white/15">
-              <ArrowRight
-                size={18}
-                className="transition-transform group-hover:translate-x-0.5"
-              />
-            </span>
           </button>
 
-          <a
+          <Link
             data-hero="cta"
             href="#"
-            className="h-12 w-12 rounded-xl border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
+            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
             aria-label="Facebook"
           >
             <Facebook size={18} />
-          </a>
-          <a
+          </Link>
+          <Link
             data-hero="cta"
             href="#"
-            className="h-12 w-12 rounded-xl border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
+            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
             aria-label="Twitter"
           >
-            <Twitter size={18} />
-          </a>
-          <a
+            <FaXTwitter size={18} />
+          </Link>
+          <Link
             data-hero="cta"
             href="#"
-            className="h-12 w-12 rounded-xl border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
+            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
             aria-label="Instagram"
           >
             <Instagram size={18} />
-          </a>
+          </Link>
         </div>
       </div>
-
-      
     </section>
   );
 };

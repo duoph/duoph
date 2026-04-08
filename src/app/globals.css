@@ -103,6 +103,22 @@ body {
     mix-blend-mode: overlay;
   }
 
+  .hero-aurora {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(120vw, 1100px);
+    height: min(65vh, 560px);
+    translate: -50% -50%;
+    pointer-events: none;
+    background:
+      radial-gradient(ellipse 100% 48% at 50% 42%, rgba(24, 112, 78, 0.2), transparent 58%),
+      radial-gradient(ellipse 88% 40% at 50% 52%, rgba(52, 211, 153, 0.12), transparent 56%),
+      radial-gradient(ellipse 95% 36% at 50% 58%, rgba(16, 185, 129, 0.09), transparent 52%);
+    filter: blur(42px);
+    opacity: 0.92;
+  }
+
   .grid-overlay {
     background-image:
       radial-gradient(600px 320px at 50% 15%, rgba(24,112,78,0.12), transparent 60%),
