@@ -6,6 +6,7 @@ import { FaXTwitter } from "react-icons/fa6";
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { FaLinkedinIn } from "react-icons/fa";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -119,16 +120,19 @@ const Hero = () => {
           data-hero="visual"
           className="mt-10 flex flex-wrap items-center justify-center gap-4"
         >
-          <button
-            data-hero="cta"
-            className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-[#18704E] px-7 py-4 text-white font-semibold shadow-[0_18px_60px_rgba(24,112,78,0.22)] hover:-translate-y-px transition"
-          >
-            Get Started
-          </button>
+          <Link href="#contact">
+            {" "}
+            <button
+              data-hero="cta"
+              className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-[#18704E] px-7 py-4 text-white font-semibold shadow-[0_18px_60px_rgba(24,112,78,0.22)] hover:-translate-y-px transition"
+            >
+              Contact Now
+            </button>
+          </Link>
 
           <Link
             data-hero="cta"
-            href="#"
+            href="https://www.facebook.com/profile.php?id=61555640383680"
             className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black hover:text-white hover:bg-[#18704E] transition"
             aria-label="Facebook"
           >
@@ -136,7 +140,7 @@ const Hero = () => {
           </Link>
           <Link
             data-hero="cta"
-            href="#"
+            href="https://x.com/duoph_tech"
             className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black  hover:bg-[#18704E] hover:text-white transition"
             aria-label="Twitter"
           >
@@ -144,11 +148,19 @@ const Hero = () => {
           </Link>
           <Link
             data-hero="cta"
-            href="#"
+            href="https://www.instagram.com/duoph.technologies/"
             className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black hover:text-white hover:bg-[#18704E] transition"
             aria-label="Instagram"
           >
             <Instagram size={18} />
+          </Link>
+          <Link
+            data-hero="cta"
+            href="https://www.linkedin.com/company/duoph-technol0gies"
+            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black hover:text-white hover:bg-[#18704E] transition"
+            aria-label="LinkedIn"
+          >
+            <FaLinkedinIn scale={18} />
           </Link>
         </div>
       </div>
