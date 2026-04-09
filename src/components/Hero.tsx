@@ -118,7 +118,7 @@ const Hero = () => {
 
         <div
           data-hero="visual"
-          className="mt-10 flex flex-wrap items-center justify-center gap-4"
+          className="mt-10 flex flex-wrap items-center justify-center gap-4 flex-col md:flex-row "
         >
           <Link href="#contact">
             {" "}
@@ -130,6 +130,7 @@ const Hero = () => {
             </button>
           </Link>
 
+          <div className="flex items-center justify-center gap-4">
           <Link
             data-hero="cta"
             href="https://www.facebook.com/profile.php?id=61555640383680"
@@ -162,6 +163,9 @@ const Hero = () => {
           >
             <FaLinkedinIn scale={18} />
           </Link>
+          </div>
+
+         
         </div>
       </div>
     </section>

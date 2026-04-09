@@ -1,6 +1,6 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
@@ -9,6 +9,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Contact = () => {
   const rootRef = useRef<HTMLElement | null>(null);
+  const [status, setStatus] = useState<
+    "idle" | "sending" | "sent" | "error"
+  >("idle");
+  const [error, setError] = useState<string | null>(null);
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
 
   useLayoutEffect(() => {
     const el = rootRef.current;
@@ -43,6 +54,36 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
 
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    setError(null);
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      const data = (await res.json()) as { ok?: boolean; error?: string };
+
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || "Failed to send");
+      }
+
+      setStatus("sent");
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (err) {
+      setStatus("error");
+      setError(err instanceof Error ? err.message : "Failed to send");
+    }
+  }
+
   return (
     <section ref={rootRef} id="contact" className="py-24 relative overflow-hidden md:px-[110px] px-[20px]">
       {/* Background Glow */}
@@ -73,30 +114,25 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-xs text-black/40 uppercase tracking-widest font-bold">Call us</p>
-                  <p className="text-black font-medium">+1 (234) 567-890</p>
+                  <p className="text-black font-medium">+91 8589920409</p>
                 </div>
               </div>
-              {/* <div className="flex items-center gap-4">
-                <div className="w-12 h-12 glass rounded-xl flex items-center justify-center text-primary">
-                  <MapPin size={20} />
-                </div>
-                <div>
-                  <p className="text-xs text-black/40 uppercase tracking-widest font-bold">Visit us</p>
-                  <p className="text-black font-medium">Tech District, SF, CA</p>
-                </div>
-              </div> */}
+          
             </div>
           </div>
 
           <div data-contact="form" className="glass p-8 md:p-12 rounded-[40px] border border-black/10 relative">
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={onSubmit}>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium     text-[#18704e] ml-1">Name</label>
                   <input 
                     type="text" 
                     className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
-                    placeholder="John Doe"
+                    placeholder="Your Name"
+                    value={form.name}
+                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                    required
                   />
                 </div>
                 <div className="space-y-2">
@@ -104,22 +140,31 @@ const Contact = () => {
                   <input 
                     type="email" 
                     className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
-                    placeholder="Enter your Email"
+                    placeholder="Your Email"
+                    value={form.email}
+                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                    required
                   />
                 </div>
                 <div className="space-y-2 md:col-span-2">
                   <label className="text-sm font-medium text-[#18704e] ml-1">Contact Number</label>
                   <input
                     type="tel"
-                    inputMode="tel"
+                    inputMode="numeric"
                     autoComplete="tel"
+                    pattern="[0-9]*"
                     className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
-                    placeholder="+1 (555) 000-0000"
+                    placeholder="Your Contact Number"
+                    value={form.phone}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        phone: e.target.value.replace(/\D/g, ""),
+                      }))
+                    }
                   />
                 </div>
               </div>
-
-          
 
               <div className="space-y-2">
                 <label className="text-sm font-medium text-[#18704e] ml-1">Message</label>
@@ -127,11 +172,26 @@ const Contact = () => {
                   rows={4}
                   className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black resize-none"
                   placeholder="Tell us about your project..."
+                  value={form.message}
+                  onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                  required
                 />
               </div>
 
-              <button className="w-full py-4 bg-[#18704e] hover:brightness-110 text-white rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-xl shadow-primary/20 group">
-                Send Message <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              {status !== "idle" ? (
+                <div className="text-sm text-black/60">
+                  {status === "sending" ? "Sending..." : null}
+                  {status === "sent" ? "Sent. We’ll get back to you shortly." : null}
+                  {status === "error" ? (error || "Failed to send") : null}
+                </div>
+              ) : null}
+
+              <button
+                disabled={status === "sending"}
+                className="w-full py-4 bg-[#18704e] disabled:opacity-60 disabled:cursor-not-allowed hover:brightness-110 text-white rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-xl shadow-primary/20 group"
+              >
+                Send Message{" "}
+                <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
             </form>
           </div>
