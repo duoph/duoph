@@ -64,6 +64,13 @@ body {
   }
   html {
     @apply font-sans;
+    scroll-padding-top: 6rem;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
   button,
   input,

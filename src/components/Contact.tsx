@@ -49,9 +49,9 @@ const Contact = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10" />
 
       <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div data-contact="left">
-            <h2 className="text-primary font-bold tracking-widest uppercase text-sm mb-4">Get in Touch</h2>
+            <h2 className="text-[#18704e] font-bold tracking-widest uppercase text-sm mb-4">Get in Touch</h2>
             <h3 className="text-4xl md:text-5xl font-bold mb-8 text-black">Ready to grow your digital presence?</h3>
             <p className="text-black/60 mb-12 text-lg">
               Schedule a consultation today and let's discuss how we can help you achieve your business goals with modern tech solutions.
@@ -64,7 +64,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <p className="text-xs text-black/40 uppercase tracking-widest font-bold">Email us</p>
-                  <p className="text-black font-medium">hello@duoph.com</p>
+                  <p className="text-black font-medium">admin@duoph.in</p>
                 </div>
               </div>
               <div className="flex items-center gap-4">
@@ -76,7 +76,7 @@ const Contact = () => {
                   <p className="text-black font-medium">+1 (234) 567-890</p>
                 </div>
               </div>
-              <div className="flex items-center gap-4">
+              {/* <div className="flex items-center gap-4">
                 <div className="w-12 h-12 glass rounded-xl flex items-center justify-center text-primary">
                   <MapPin size={20} />
                 </div>
@@ -84,7 +84,7 @@ const Contact = () => {
                   <p className="text-xs text-black/40 uppercase tracking-widest font-bold">Visit us</p>
                   <p className="text-black font-medium">Tech District, SF, CA</p>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 
@@ -92,7 +92,7 @@ const Contact = () => {
             <form className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-black/70 ml-1">Name</label>
+                  <label className="text-sm font-medium     text-[#18704e] ml-1">Name</label>
                   <input 
                     type="text" 
                     className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
@@ -100,29 +100,29 @@ const Contact = () => {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-sm font-medium text-black/70 ml-1">Email</label>
+                    <label className="text-sm font-medium text-[#18704e] ml-1">Email</label>
                   <input 
                     type="email" 
                     className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
-                    placeholder="john@example.com"
+                    placeholder="Enter your Email"
+                  />
+                </div>
+                <div className="space-y-2 md:col-span-2">
+                  <label className="text-sm font-medium text-[#18704e] ml-1">Contact Number</label>
+                  <input
+                    type="tel"
+                    inputMode="tel"
+                    autoComplete="tel"
+                    className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
+                    placeholder="+1 (555) 000-0000"
                   />
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-black/70 ml-1">Service Interest</label>
-                <select className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black appearance-none">
-                  <option className="bg-white">Website Development</option>
-                  <option className="bg-white">Mobile App Development</option>
-                  <option className="bg-white">E-commerce Websites</option>
-                  <option className="bg-white">Digital Marketing</option>
-                  <option className="bg-white">Social Media Management</option>
-                  <option className="bg-white">Automation & Optimization</option>
-                </select>
-              </div>
+          
 
               <div className="space-y-2">
-                <label className="text-sm font-medium text-black/70 ml-1">Message</label>
+                <label className="text-sm font-medium text-[#18704e] ml-1">Message</label>
                 <textarea 
                   rows={4}
                   className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black resize-none"
@@ -130,7 +130,7 @@ const Contact = () => {
                 />
               </div>
 
-              <button className="w-full py-4 bg-primary hover:brightness-110 text-white rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-xl shadow-primary/20 group">
+              <button className="w-full py-4 bg-[#18704e] hover:brightness-110 text-white rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-xl shadow-primary/20 group">
                 Send Message <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
               </button>
             </form>

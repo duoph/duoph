@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
@@ -14,6 +14,16 @@ const navLinks = [
   { href: "#services", label: "Services" },
   { href: "#contact", label: "Contact Us" },
 ];
+
+function onHashLinkClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
+  if (!href.startsWith("#")) return;
+  e.preventDefault();
+  const el = document.getElementById(href.slice(1));
+  if (!el) return;
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  window.history.replaceState(null, "", href);
+}
 
 const Header = () => {
   const navRef = useRef<HTMLElement | null>(null);
@@ -74,6 +84,7 @@ const Header = () => {
                 key={item.href}
                 href={item.href}
                 className="text-[15px] font-medium text-neutral-600 transition-colors hover:text-[#18704E]"
+                onClick={(e) => onHashLinkClick(e, item.href)}
               >
                 {item.label}
               </Link>

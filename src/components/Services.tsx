@@ -1,80 +1,51 @@
 "use client";
 
-import { useLayoutEffect, useRef } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { 
-  Code2, 
-  Smartphone, 
-  ShoppingBag, 
-  TrendingUp, 
-  Share2, 
-  Zap 
-} from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const services = [
-  {
-    title: "Website Development",
-    icon: <Code2 size={24} />,
-    description: "We design and develop fast, secure, and scalable websites tailored to your business goals. From corporate websites to custom web platforms, our focus is on clean design, performance, and long-term maintainability. Every website we build is responsive, SEO-friendly, and optimized for real users—not just visuals.",
-    color: "from-primary to-[#0f5538]"
-  },
-  {
-    title: "Mobile App Development",
-    icon: <Smartphone size={24} />,
-    description: "We build reliable mobile applications that solve real business problems. From concept to deployment, we handle UI/UX, backend integration, and performance optimization. Our apps are designed for usability, scalability, and smooth user experience across devices.",
-    color: "from-blue-500 to-primary"
-  },
-  {
-    title: "E-commerce Websites (Shopify)",
-    icon: <ShoppingBag size={24} />,
-    description: "We create high-converting Shopify stores built for growth. This includes custom theme development, product setup, payment gateway integration, automation, and performance optimization. Our approach focuses on conversion, speed, and easy management so you can scale without friction.",
-    color: "from-accent to-orange-600"
-  },
-  {
-    title: "Digital Marketing",
-    icon: <TrendingUp size={24} />,
-    description: "Our digital marketing strategies are data-driven and result-oriented. We help businesses grow visibility, generate quality leads, and improve conversions through SEO, paid campaigns, email marketing, and analytics-based optimization. No guesswork—only measurable outcomes.",
-    color: "from-primary to-accent"
-  },
-  {
-    title: "Social Media Management",
-    icon: <Share2 size={24} />,
-    description: "We manage and grow social media accounts with a clear brand voice and consistent strategy. From content planning and creatives to posting schedules and performance tracking, we help brands build engagement and trust across platforms.",
-    color: "from-blue-400 to-primary"
-  },
-  {
-    title: "Automation & Process Optimization",
-    icon: <Zap size={24} />,
-    description: "We design and implement automation solutions that reduce manual work and improve efficiency. From CRM and marketing automation to internal workflows and system integrations, we help businesses save time, reduce errors, and operate smarter using modern tools and custom solutions.",
-    color: "from-yellow-500 to-accent"
-  }
-];
-
-const ServiceCard = ({ service }: { service: any }) => {
-  return (
-    <div data-card className="group relative perspective-1000">
-      <div className={`absolute inset-0 bg-linear-to-br ${service.color} opacity-0 group-hover:opacity-20 transition-opacity duration-500 rounded-3xl -z-10 blur-xl`} />
-      
-      <div className="glass h-full p-8 rounded-3xl border border-black/10 group-hover:border-black/15 transition-all duration-500 preserve-3d group-hover:-translate-y-2 group-hover:transform-[rotateX(4deg)_rotateY(-5deg)_translateY(-8px)]">
-        <div className={`w-14 h-14 rounded-2xl bg-linear-to-br ${service.color} flex items-center justify-center text-white mb-6 shadow-lg`}>
-          {service.icon}
-        </div>
-        <h3 className="text-xl font-bold mb-4 text-black group-hover:text-primary transition-colors">
-          {service.title}
-        </h3>
-        <p className="text-black/60 text-sm leading-relaxed">
-          {service.description}
-        </p>
-      </div>
-    </div>
-  );
+type ServiceItem = {
+  title: string;
+  description: string;
 };
 
 const Services = () => {
   const rootRef = useRef<HTMLElement | null>(null);
+  const services = useMemo<ServiceItem[]>(
+    () => [
+      {
+        title: "Branding",
+        description:
+          "Branding builds a strong identity that people remember. We craft positioning, messaging, and visual systems that stay consistent across every touchpoint.",
+      },
+      {
+        title: "Development",
+        description:
+          "We build fast, secure websites and web apps with clean architecture, strong performance, and scalable foundations that grow with your business.",
+      },
+      {
+        title: "UI/UX Design",
+        description:
+          "UI/UX design is designing digital interfaces for a great user experience.",
+      },
+      {
+        title: "Graphic Design",
+        description:
+          "From social creatives to brand assets, we produce sharp design that supports your message and keeps everything visually consistent.",
+      },
+      {
+        title: "SEO",
+        description:
+          "Technical SEO, on-page optimization, and content strategy that improves search visibility and drives qualified traffic over time.",
+      },
+    ],
+    [],
+  );
+
+  const [activeIndex, setActiveIndex] = useState(2);
 
   useLayoutEffect(() => {
     const el = rootRef.current;
@@ -90,11 +61,11 @@ const Services = () => {
           duration: 0.75,
           ease: "power3.out",
           scrollTrigger: { trigger: el, start: "top 80%", once: true },
-        }
+        },
       );
 
       gsap.fromTo(
-        "[data-card]",
+        "[data-services='row']",
         { opacity: 0, y: 24 },
         {
           opacity: 1,
@@ -103,29 +74,114 @@ const Services = () => {
           ease: "power3.out",
           stagger: 0.08,
           scrollTrigger: { trigger: el, start: "top 70%", once: true },
-        }
+        },
       );
     }, el);
 
     return () => ctx.revert();
   }, []);
 
+  const active = services[activeIndex];
+  const prev = () =>
+    setActiveIndex((i) => (i - 1 + services.length) % services.length);
+  const next = () => setActiveIndex((i) => (i + 1) % services.length);
+
   return (
-    <section ref={rootRef} id="services" className="py-24 bg-black/0">
+    <section
+      ref={rootRef}
+      id="services"
+      className="relative overflow-hidden py-24 text-black bg-white px-[110px]"
+    >
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute -left-24 -top-28 h-[420px] w-[420px] rounded-full bg-primary/18 blur-[120px]" />
+        <div className="absolute -right-28 -bottom-36 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[140px]" />
+      </div>
+
       <div className="container mx-auto px-6">
-        <div data-services="heading" className="text-center mb-16">
-          <h2 className="text-primary font-bold tracking-widest uppercase text-sm mb-4">
-            Our Expertise
-          </h2>
-          <h3 className="text-4xl md:text-5xl font-bold text-black">
-            Digital solutions built for <span className="text-glow">performance</span>
-          </h3>
+        <div
+          data-services="heading"
+          className="flex flex-col items-start gap-10 lg:flex-row lg:gap-16"
+        >
+          <div>
+            <div className="text-xs font-semibold tracking-widest text-[#18704e]">
+              OUR SERVICES
+            </div>
+            <h3 className="mt-5 text-4xl font-extrabold leading-[1.05] sm:text-5xl ">
+              What <span className="text-[#18704e]">Services</span>
+              <br />
+              We’re Offering
+            </h3>
+          </div>
+
+          <p className="max-w-xl text-sm leading-relaxed text-black lg:mt-2">
+            We offer services that can help businesses improve their visibility
+            and business reputation online, expand market reach, and increase
+            turnover through effective digital strategies. Following are the
+            services we provide.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <ServiceCard key={index} service={service} />
-          ))}
+        <div className="mt-14 flex flex-col gap-10 lg:flex-row lg:items-center">
+          <div className="relative lg:flex-[1.35]">
+            <div className="divide-y divide-white/12 overflow-hidden rounded-3xl border border-white/12 bg-white/0">
+              {services.map((s, idx) => {
+                const isActive = idx === activeIndex;
+                return (
+                  <button
+                    key={s.title}
+                    type="button"
+                    data-services="row"
+                    onClick={() => setActiveIndex(idx)}
+                    className="group flex w-full items-center justify-between gap-10 px-6 py-7 text-left transition-colors hover:bg-white/2 md:px-8"
+                  >
+                    <div className="min-w-0">
+                      <div
+                        className={[
+                          "text-3xl font-semibold tracking-tight md:text-4xl",
+                          isActive ? "text-black" : "text-black",
+                        ].join(" ")}
+                      >
+                        {s.title}
+                        {isActive ? (
+                          <span className="text-black">.</span>
+                        ) : null}
+                      </div>
+                    </div>
+
+                    <div className="hidden max-w-sm items-center gap-10 md:flex">
+                      <p
+                        className={[
+                          "text-xs leading-relaxed",
+                          isActive ? "text-black" : "text-black",
+                        ].join(" ")}
+                      >
+                        {s.description}
+                      </p>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            <div className="mt-5 flex items-center justify-end gap-3 lg:hidden">
+              <button
+                type="button"
+                onClick={prev}
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white/80 hover:border-white/30"
+                aria-label="Previous service"
+              >
+                <ArrowRight size={16} className="rotate-180" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                className="grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white/80 hover:border-white/30"
+                aria-label="Next service"
+              >
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -133,4 +189,3 @@ const Services = () => {
 };
 
 export default Services;
-

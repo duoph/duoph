@@ -73,7 +73,7 @@ const Hero = () => {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-svh flex items-center justify-center overflow-hidden pt-24"
+      className="relative min-h-svh flex items-center justify-center overflow-hidden pt-24 px-[110px]"
     >
       <div className="absolute inset-0 z-0">
         <div
@@ -121,7 +121,7 @@ const Hero = () => {
         >
           <button
             data-hero="cta"
-            className="group inline-flex items-center justify-center gap-3 rounded-full bg-[#18704E] px-7 py-4 text-white font-semibold shadow-[0_18px_60px_rgba(24,112,78,0.22)] hover:-translate-y-px transition"
+            className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-[#18704E] px-7 py-4 text-white font-semibold shadow-[0_18px_60px_rgba(24,112,78,0.22)] hover:-translate-y-px transition"
           >
             Get Started
           </button>
@@ -129,7 +129,7 @@ const Hero = () => {
           <Link
             data-hero="cta"
             href="#"
-            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
+            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black hover:text-white hover:bg-[#18704E] transition"
             aria-label="Facebook"
           >
             <Facebook size={18} />
@@ -137,7 +137,7 @@ const Hero = () => {
           <Link
             data-hero="cta"
             href="#"
-            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
+            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black  hover:bg-[#18704E] hover:text-white transition"
             aria-label="Twitter"
           >
             <FaXTwitter size={18} />
@@ -145,7 +145,7 @@ const Hero = () => {
           <Link
             data-hero="cta"
             href="#"
-            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black/70 hover:text-black hover:bg-black/5 transition"
+            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black hover:text-white hover:bg-[#18704E] transition"
             aria-label="Instagram"
           >
             <Instagram size={18} />
