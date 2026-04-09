@@ -37,10 +37,10 @@ const About = () => {
     <section
       ref={rootRef}
       id="about"
-      className="py-24 relative overflow-hidden md:px-[110px] px-[20px]"
+      className="py-24 relative overflow-hidden px-[20px] md:px-[110px] "
     >
-      <div className="container mx-auto">
-        <div className="max-w-4xl mx-auto">
+      <div className="container ">
+        <div className="max-w-4xl ">
           <div data-reveal className="text-center mb-16">
             <h2 className="font-monument text-primary font-bold tracking-widest uppercase text-sm mb-4">
               About Duoph

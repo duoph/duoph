@@ -138,20 +138,26 @@ const Services = () => {
                       <div
                         className={[
                           "font-monument text-3xl font-semibold tracking-tight md:text-4xl",
-                          isActive ? "text-black" : "text-black",
+                          isActive ? "text-[#18704e]" : "text-black",
                         ].join(" ")}
                       >
                         {s.title}
                         {isActive ? (
-                          <span className="text-black">.</span>
+                          <span className="text-[#18704e] ">.</span>
                         ) : null}
                       </div>
+
+                      {isActive ? (
+                        <p className="mt-3  leading-relaxed text-black md:hidden">
+                          {s.description}
+                        </p>
+                      ) : null}
                     </div>
 
-                    <div className="hidden max-w-sm items-center gap-10 md:flex">
+                    <div className="hidden max-w-lg items-center gap-10 md:flex">
                       <p
                         className={[
-                          "text-xs leading-relaxed",
+                          "text-[18px] leading-relaxed",
                           isActive ? "text-black" : "text-black",
                         ].join(" ")}
                       >
@@ -163,24 +169,7 @@ const Services = () => {
               })}
             </div>
 
-            <div className="mt-5 flex items-center justify-end gap-3 lg:hidden">
-              <button
-                type="button"
-                onClick={prev}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white/80 hover:border-white/30"
-                aria-label="Previous service"
-              >
-                <ArrowRight size={16} className="rotate-180" />
-              </button>
-              <button
-                type="button"
-                onClick={next}
-                className="grid h-10 w-10 place-items-center rounded-full border border-white/20 text-white/80 hover:border-white/30"
-                aria-label="Next service"
-              >
-                <ArrowRight size={16} />
-              </button>
-            </div>
+            
           </div>
         </div>
       </div>
