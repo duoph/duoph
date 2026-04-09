@@ -39,7 +39,7 @@ const Header = () => {
       gsap.fromTo(
         nav,
         { y: -24, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" }
+        { y: 0, opacity: 1, duration: 0.65, ease: "power3.out" },
       );
 
       ScrollTrigger.create({
@@ -75,18 +75,15 @@ const Header = () => {
             href="/"
             className="flex shrink-0 items-center gap-3 text-black"
           >
-            
-                <Image
-                  src="/logo.png"
-                  alt="Duoph"
-                  width={100}
-                  height={100}
-                  className="h-full w-full object-cover"
-                  priority
-                  onError={() => setLogoOk(false)}
-                />
-           
-        
+            <Image
+              src="/logo.png"
+              alt="Duoph"
+              width={100}
+              height={100}
+              className="h-full w-full object-cover"
+              priority
+              onError={() => setLogoOk(false)}
+            />
           </Link>
 
           <div className="hidden items-center gap-7 md:flex">
@@ -110,12 +107,32 @@ const Header = () => {
             onClick={() => setMenuOpen((v) => !v)}
           >
             {menuOpen ? (
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 6l12 12M18 6l-12 12" />
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 6l12 12M18 6l-12 12"
+                />
               </svg>
             ) : (
-              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
               </svg>
             )}
           </button>
@@ -150,10 +167,6 @@ const Header = () => {
                 </Link>
               ))}
             </div>
-
-            
-
-            
           </div>
         </div>
       ) : null}
