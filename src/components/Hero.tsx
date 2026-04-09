@@ -101,7 +101,7 @@ const Hero = () => {
 
         <h1
           data-hero="title"
-          className="font-monument mt-10 text-[68px] leading-[0.9] sm:text-7xl md:text-[80px] font-bold tracking-tight text-black"
+          className="font-monument mt-10 text-[58px] leading-[0.9] sm:text-7xl md:text-[80px] font-bold tracking-tight text-black"
         >
           <span className="text-[#18704e]">Software</span> That Powers. <br />{" "}
           <span className="text-[#18704e]">Marketing</span> That Grows.

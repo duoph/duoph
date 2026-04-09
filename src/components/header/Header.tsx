@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Facebook, Globe, Instagram, Linkedin, X } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,6 +29,7 @@ function onHashLinkClick(e: MouseEvent<HTMLAnchorElement>, href: string) {
 const Header = () => {
   const navRef = useRef<HTMLElement | null>(null);
   const [logoOk, setLogoOk] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const nav = navRef.current;
@@ -51,6 +53,15 @@ const Header = () => {
 
     return () => ctx.revert();
   }, []);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMenuOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [menuOpen]);
 
   return (
     <header className="pointer-events-none fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4 md:px-6 md:pt-6">
@@ -94,14 +105,58 @@ const Header = () => {
           <button
             type="button"
             className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-neutral-800 md:hidden"
-            aria-label="Open menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
           >
-            <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
-            </svg>
+            {menuOpen ? (
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 6l12 12M18 6l-12 12" />
+              </svg>
+            ) : (
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            )}
           </button>
         </nav>
       </div>
+
+      {menuOpen ? (
+        <div className="pointer-events-auto fixed inset-0 z-60 md:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 bg-black/35 backdrop-blur-[2px]"
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          />
+
+          <div className="absolute left-1/2 top-1/2 w-[86%] max-w-[420px] -translate-x-1/2 -translate-y-1/2 rounded-[36px] bg-white p-10 shadow-[0_30px_90px_rgba(0,0,0,0.25)]">
+            <div className="flex flex-col items-center gap-7 text-[18px] font-medium text-black">
+              {navLinks.map((item) => (
+                <Link
+                  key={`m-${item.href}`}
+                  href={item.href}
+                  onClick={(e) => {
+                    onHashLinkClick(e, item.href);
+                    setMenuOpen(false);
+                  }}
+                  className="transition-opacity hover:opacity-70"
+                >
+                  {item.label === "About Us" ? "About Us" : null}
+                  {item.label === "Services" ? "Our Services" : null}
+                  {item.label === "Contact Us" ? "Contact Us" : null}
+                  {item.label === "Home" ? "Home" : null}
+                </Link>
+              ))}
+            </div>
+
+            
+
+            
+          </div>
+        </div>
+      ) : null}
     </header>
   );
 };
