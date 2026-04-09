@@ -90,7 +90,7 @@ const Services = () => {
     <section
       ref={rootRef}
       id="services"
-      className="relative overflow-hidden py-24 text-black bg-white px-[110px]"
+      className="relative overflow-hidden py-24 text-black bg-white md:px-[110px] px-[20px]"
     >
       <div className="absolute inset-0 -z-10">
         <div className="absolute -left-24 -top-28 h-[420px] w-[420px] rounded-full bg-primary/18 blur-[120px]" />
@@ -106,7 +106,7 @@ const Services = () => {
             <div className="text-xs font-semibold tracking-widest text-[#18704e]">
               OUR SERVICES
             </div>
-            <h3 className="mt-5 text-4xl font-extrabold leading-[1.05] sm:text-5xl ">
+            <h3 className="font-monument mt-5 text-4xl font-extrabold leading-[1.05] sm:text-5xl ">
               What <span className="text-[#18704e]">Services</span>
               <br />
               We’re Offering
@@ -137,7 +137,7 @@ const Services = () => {
                     <div className="min-w-0">
                       <div
                         className={[
-                          "text-3xl font-semibold tracking-tight md:text-4xl",
+                          "font-monument text-3xl font-semibold tracking-tight md:text-4xl",
                           isActive ? "text-black" : "text-black",
                         ].join(" ")}
                       >

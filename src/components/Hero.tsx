@@ -73,7 +73,7 @@ const Hero = () => {
   return (
     <section
       ref={rootRef}
-      className="relative min-h-svh flex items-center justify-center overflow-hidden pt-24 px-[110px]"
+      className="relative min-h-svh flex items-center justify-center overflow-hidden pt-24 md:px-[110px] px-[20px]"
     >
       <div className="absolute inset-0 z-0">
         <div
@@ -94,13 +94,13 @@ const Hero = () => {
           data-hero="kicker"
           className="mt-6 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white px-4 py-2 text-[11px] font-semibold tracking-widest uppercase text-black/60"
         >
-          <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_0_6px_rgba(24,112,78,0.18)]" />
+          <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_0_6px_rgba(24,112,78,0.18)] " />
           Duoph Technologies
         </div>
 
         <h1
           data-hero="title"
-          className="mt-10 text-[68px] leading-[0.9] sm:text-7xl md:text-[80px] font-extrabold tracking-tight text-black"
+          className="font-monument mt-10 text-[68px] leading-[0.9] sm:text-7xl md:text-[80px] font-bold tracking-tight text-black"
         >
           <span className="text-[#18704e]">Software</span> That Powers. <br />{" "}
           <span className="text-[#18704e]">Marketing</span> That Grows.

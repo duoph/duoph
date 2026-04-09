@@ -37,15 +37,15 @@ const About = () => {
     <section
       ref={rootRef}
       id="about"
-      className="py-24 relative overflow-hidden px-[110px]"
+      className="py-24 relative overflow-hidden md:px-[110px] px-[20px]"
     >
       <div className="container mx-auto">
         <div className="max-w-4xl mx-auto">
           <div data-reveal className="text-center mb-16">
-            <h2 className="text-primary font-bold tracking-widest uppercase text-sm mb-4">
+            <h2 className="font-monument text-primary font-bold tracking-widest uppercase text-sm mb-4">
               About Duoph
             </h2>
-            <h3 className="text-4xl md:text-5xl font-bold mb-8">Our Story</h3>
+            <h3 className="font-monument text-4xl md:text-5xl font-bold mb-8">Our Story</h3>
           </div>
 
           <div>
@@ -69,7 +69,7 @@ const About = () => {
                   Hadi
                 </span>
               </Link>
-              . The name “Duoph” reflects its origins—“Duo” representing the two
+              . The name “Duoph” reflects its origins -“Duo” representing the two
               founders, and “P” and “H” standing for Praveen and Hadi. <br />{" "}
               <br /> What began as a focused software development venture has
               steadily grown into a multi-disciplinary company offering services

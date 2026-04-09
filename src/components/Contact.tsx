@@ -44,15 +44,15 @@ const Contact = () => {
   }, []);
 
   return (
-    <section ref={rootRef} id="contact" className="py-24 relative overflow-hidden">
+    <section ref={rootRef} id="contact" className="py-24 relative overflow-hidden md:px-[110px] px-[20px]">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10" />
 
       <div className="container mx-auto px-6">
         <div className="grid lg:grid-cols-2 gap-16 items-start">
           <div data-contact="left">
-            <h2 className="text-[#18704e] font-bold tracking-widest uppercase text-sm mb-4">Get in Touch</h2>
-            <h3 className="text-4xl md:text-5xl font-bold mb-8 text-black">Ready to grow your digital presence?</h3>
+            <h2 className="font-monument text-[#18704e] font-bold tracking-widest uppercase text-sm mb-4">Get in Touch</h2>
+            <h3 className="font-monument text-4xl md:text-5xl font-bold mb-8 text-black">Ready to grow your digital presence?</h3>
             <p className="text-black/60 mb-12 text-lg">
               Schedule a consultation today and let's discuss how we can help you achieve your business goals with modern tech solutions.
             </p>
