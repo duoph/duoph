@@ -21,6 +21,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  --color-brand: #18704E;
+  --color-brand-dark: #0d3d30;
   --color-primary: #18704E;
   --color-accent: #18704E;
   --color-dark-bg: #0A0A0A;
@@ -130,6 +132,13 @@ body {
     mix-blend-mode: overlay;
   }
 
+  .hero-dark-gradient {
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(24, 112, 78, 0.36), transparent 55%),
+      radial-gradient(ellipse 70% 50% at 20% 80%, rgba(6, 40, 28, 0.9), transparent 50%),
+      linear-gradient(145deg, #050f0b 0%, #0a1f16 35%, #0d281c 55%, #061410 100%);
+  }
+
   .hero-aurora {
     position: absolute;
     left: 50%;
@@ -139,11 +148,30 @@ body {
     translate: -50% -50%;
     pointer-events: none;
     background:
-      radial-gradient(ellipse 100% 48% at 50% 42%, rgba(24, 112, 78, 0.2), transparent 58%),
-      radial-gradient(ellipse 88% 40% at 50% 52%, rgba(52, 211, 153, 0.12), transparent 56%),
-      radial-gradient(ellipse 95% 36% at 50% 58%, rgba(16, 185, 129, 0.09), transparent 52%);
+      radial-gradient(ellipse 100% 48% at 50% 42%, rgba(24, 112, 78, 0.16), transparent 58%),
+      radial-gradient(ellipse 88% 40% at 50% 52%, rgba(52, 211, 153, 0.096), transparent 56%),
+      radial-gradient(ellipse 95% 36% at 50% 58%, rgba(16, 185, 129, 0.072), transparent 52%);
     filter: blur(42px);
-    opacity: 0.92;
+    opacity: 0.74;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee 42s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+    }
   }
 
   .grid-overlay {

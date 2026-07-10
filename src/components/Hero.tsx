@@ -1,175 +1,154 @@
 "use client";
 
-import Link from "next/link";
-import { ArrowRight, Facebook, Instagram, Twitter } from "lucide-react";
-import { FaXTwitter } from "react-icons/fa6";
-import { useLayoutEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { FaLinkedinIn } from "react-icons/fa";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useEffect, useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
+import { Badge } from "@/components/ui/Badge";
+import { heroStats } from "@/data/site";
 
 const Hero = () => {
-  const rootRef = useRef<HTMLElement | null>(null);
-
-  useLayoutEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      gsap.set("[data-hero]", { willChange: "transform,opacity" });
-      gsap.fromTo(
-        "[data-hero='kicker']",
-        { opacity: 0, y: 12 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" },
-      );
-      gsap.fromTo(
-        "[data-hero='title']",
-        { opacity: 0, y: 18 },
-        { opacity: 1, y: 0, duration: 0.85, delay: 0.08, ease: "power3.out" },
-      );
-      gsap.fromTo(
-        "[data-hero='sub']",
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.75, delay: 0.18, ease: "power2.out" },
-      );
-      gsap.fromTo(
-        "[data-hero='cta']",
-        { opacity: 0, y: 12 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          delay: 0.28,
-          ease: "power2.out",
-          stagger: 0.08,
-        },
-      );
-      gsap.fromTo(
-        "[data-hero='visual']",
-        { opacity: 0, y: 16 },
-        { opacity: 1, y: 0, duration: 0.85, delay: 0.12, ease: "power3.out" },
-      );
-
-      ScrollTrigger.create({
-        trigger: el,
-        start: "top top",
-        end: "bottom top",
-        scrub: true,
-        onUpdate: (self) => {
-          gsap.to("[data-hero='bg1']", { y: self.progress * 90, duration: 0 });
-          gsap.to("[data-hero='bg2']", { y: self.progress * -70, duration: 0 });
-          gsap.to("[data-hero='aurora']", {
-            y: self.progress * 40,
-            duration: 0,
-          });
-        },
-      });
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
+  const reduceMotion = useReducedMotion();
 
   return (
-    <section
-      ref={rootRef}
-      className="relative min-h-svh flex items-center justify-center overflow-hidden pt-24 md:px-[110px] px-[20px]"
-    >
-      <div className="absolute inset-0 z-0">
-        <div
-          data-hero="bg1"
-          className="absolute top-1/4 left-[6%] w-[520px] h-[520px] bg-primary/12 rounded-full blur-[140px]"
-        />
-        <div
-          data-hero="bg2"
-          className="absolute bottom-1/4 right-[6%] w-[520px] h-[520px] bg-primary/14 rounded-full blur-[140px]"
-        />
-        <div data-hero="aurora" className="hero-aurora z-1" />
-        <div className="noise pointer-events-none absolute inset-0 opacity-[0.25]" />
-        <div className="grid-overlay pointer-events-none absolute inset-0 opacity-[0.2]" />
-      </div>
+    <section className="relative flex min-h-svh items-center overflow-hidden px-5 pt-28 pb-20 text-white md:px-10 lg:px-12">
+      <HeroBackground reduceMotion={!!reduceMotion} />
 
-      <div className="container mx-auto px-6 relative z-10 flex flex-col items-center text-center">
-        <div
-          data-hero="kicker"
-          className="mt-6 inline-flex items-center gap-3 rounded-full border border-black/10 bg-white px-4 py-2 text-[11px] font-semibold tracking-widest uppercase text-black/60"
-        >
-          <span className="h-2 w-2 rounded-full bg-primary shadow-[0_0_0_6px_rgba(24,112,78,0.18)] " />
-          Duoph Technologies
-        </div>
-
-        <h1
-          data-hero="title"
-          className="font-monument mt-10 text-[58px] leading-[0.9] sm:text-7xl md:text-[80px] font-bold tracking-tight text-black"
-        >
-          <span className="text-[#18704e]">Software</span> That Powers. <br />{" "}
-          <span className="text-[#18704e]">Marketing</span> That Grows.
-        </h1>
-
-        <p
-          data-hero="sub"
-          className="mt-6 text-sm sm:text-base text-black/60 max-w-2xl"
-        >
-          Custom applications, scalable systems, and data-driven marketing
-          strategies designed to help you operate smarter, attract customers,
-          and increase revenue.
-        </p>
-
-        <div
-          data-hero="visual"
-          className="mt-10 flex flex-wrap items-center justify-center gap-4 flex-col md:flex-row "
-        >
-          <Link href="#contact">
-            {" "}
-            <button
-              data-hero="cta"
-              className="group inline-flex items-center justify-center gap-3 rounded-2xl bg-[#18704E] px-7 py-4 text-white font-semibold shadow-[0_18px_60px_rgba(24,112,78,0.22)] hover:-translate-y-px transition"
-            >
-              Contact Now
-            </button>
-          </Link>
-
-          <div className="flex items-center justify-center gap-4">
-          <Link
-            data-hero="cta"
-            href="https://www.facebook.com/profile.php?id=61555640383680"
-            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black hover:text-white hover:bg-[#18704E] transition"
-            aria-label="Facebook"
+      <div className="relative z-10 mx-auto w-full max-w-7xl">
+        <div className="max-w-3xl">
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <Facebook size={18} />
-          </Link>
-          <Link
-            data-hero="cta"
-            href="https://x.com/duoph_tech"
-            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black  hover:bg-[#18704E] hover:text-white transition"
-            aria-label="Twitter"
-          >
-            <FaXTwitter size={18} />
-          </Link>
-          <Link
-            data-hero="cta"
-            href="https://www.instagram.com/duoph.technologies/"
-            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black hover:text-white hover:bg-[#18704E] transition"
-            aria-label="Instagram"
-          >
-            <Instagram size={18} />
-          </Link>
-          <Link
-            data-hero="cta"
-            href="https://www.linkedin.com/company/duoph-technol0gies"
-            className="h-12 w-12 rounded-full border border-black/10 bg-white grid place-items-center text-black hover:text-white hover:bg-[#18704E] transition"
-            aria-label="LinkedIn"
-          >
-            <FaLinkedinIn scale={18} />
-          </Link>
-          </div>
+            <Badge light>
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+              Duoph Technologies
+            </Badge>
+          </motion.div>
 
-         
+          <motion.h1
+            initial={reduceMotion ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="font-monument mt-8 text-4xl leading-[1.05] font-bold tracking-tight sm:text-5xl md:text-6xl lg:text-[4.35rem]"
+          >
+            Technology That Moves{" "}
+            <span className="text-emerald-300">Businesses</span> Forward.
+          </motion.h1>
+
+          <motion.p
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg"
+          >
+            We help businesses attract customers, automate operations, and build
+            software that scales — so you grow revenue without drowning in
+            manual work.
+          </motion.p>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-10 flex flex-wrap items-center gap-4"
+          >
+            <MagneticButton href="#contact" variant="primary">
+              Book a Free Consultation
+              <ArrowRight className="h-4 w-4" aria-hidden />
+            </MagneticButton>
+            <MagneticButton href="#work" variant="secondary">
+              View Our Work
+              <ArrowUpRight className="h-4 w-4" aria-hidden />
+            </MagneticButton>
+          </motion.div>
+
+          <motion.div
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-14 grid grid-cols-2 gap-6 border-t border-white/10 pt-10 sm:grid-cols-4 sm:gap-8"
+            aria-label="Company trust metrics"
+          >
+            {heroStats.map((stat) => (
+              <div key={stat.label}>
+                <p className="font-monument text-3xl font-bold tracking-tight text-white md:text-4xl">
+                  <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                </p>
+                <p className="mt-1.5 text-xs font-medium tracking-wide text-white/50 uppercase sm:text-sm sm:normal-case sm:tracking-normal">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </motion.div>
         </div>
       </div>
     </section>
   );
 };
+
+function HeroBackground({ reduceMotion }: { reduceMotion: boolean }) {
+  const shapesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const el = shapesRef.current;
+    if (!el) return;
+
+    let frame = 0;
+    let raf = 0;
+    const shapes = el.querySelectorAll<HTMLElement>("[data-float]");
+
+    const tick = () => {
+      frame += 1;
+      shapes.forEach((shape, i) => {
+        const speed = 0.008 + i * 0.002;
+        const y = Math.sin(frame * speed + i) * (10 + i * 4);
+        const x = Math.cos(frame * speed * 0.7 + i) * (6 + i * 2);
+        shape.style.transform = `translate(${x}px, ${y}px)`;
+      });
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [reduceMotion]);
+
+  return (
+    <div className="absolute inset-0 z-0" aria-hidden>
+      <div className="hero-dark-gradient absolute inset-0" />
+      <div className="hero-aurora absolute inset-0 opacity-80" />
+      <div
+        className="absolute top-[12%] left-[4%] h-[480px] w-[480px] rounded-full bg-[#18704E]/28 blur-[120px]"
+      />
+      <div
+        className="absolute right-[2%] bottom-[8%] h-[520px] w-[520px] rounded-full bg-emerald-400/12 blur-[130px]"
+      />
+
+      <div ref={shapesRef} className="pointer-events-none absolute inset-0">
+        <div
+          data-float
+          className="absolute top-[22%] right-[12%] h-24 w-24 rounded-3xl border border-white/10 bg-white/5 backdrop-blur-sm"
+        />
+        <div
+          data-float
+          className="absolute bottom-[28%] left-[8%] h-16 w-16 rounded-full border border-emerald-400/20 bg-emerald-400/10"
+        />
+        <div
+          data-float
+          className="absolute top-[55%] right-[28%] h-10 w-10 rotate-12 rounded-xl border border-white/10 bg-white/[0.04]"
+        />
+        <div
+          data-float
+          className="absolute top-[35%] left-[42%] h-3 w-3 rounded-full bg-emerald-300/40"
+        />
+      </div>
+
+      <div className="noise pointer-events-none absolute inset-0 opacity-[0.14]" />
+      <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/55" />
+    </div>
+  );
+}
 
 export default Hero;

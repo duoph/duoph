@@ -1,34 +1,209 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  Facebook,
+  Instagram,
+  Linkedin,
+  ArrowRight,
+} from "lucide-react";
+import { siteConfig } from "@/data/site";
+import { services } from "@/data/services";
 
-const Footer = () => {
+const resourceLinks = [
+  { href: "#work", label: "Featured Projects" },
+  { href: "#process", label: "Our Process" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#testimonials", label: "Testimonials" },
+];
+
+const companyLinks = [
+  { href: "#why-duoph", label: "About" },
+  { href: "#contact", label: "Contact" },
+  { href: "#", label: "Privacy Policy" },
+  { href: "#", label: "Terms of Service" },
+];
+
+export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  function onNewsletter(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setSubscribed(true);
+    setEmail("");
+  }
+
   return (
-    <footer className="py-12 border-t border-black/10 px-[110px]">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-          <div>
-            <Link href="/" className="text-2xl font-bold tracking-tighter text-black">
-              <Image src="/logo.png" alt="Duoph" width={100} height={100} />
+    <footer className="relative overflow-hidden border-t border-black/8 bg-[#050f0b] text-white">
+      <div className="absolute inset-0">
+        <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-[#18704E]/20 blur-[100px]" />
+        <div className="noise absolute inset-0 opacity-[0.1]" />
+      </div>
+
+      <div className="relative z-10 mx-auto max-w-7xl px-5 pt-16 pb-10 md:px-10 lg:px-12">
+        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
+          <div className="lg:col-span-4">
+            <Link href="/" className="inline-block">
+              <Image
+                src="/logo.png"
+                alt="Duoph Technologies"
+                width={120}
+                height={40}
+                className="h-10 w-auto brightness-0 invert"
+              />
             </Link>
-            <p className="text-black/50 text-sm mt-2 max-w-xs">
-              Future-driven digital agency building modern solutions for growing brands.
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
+              Duoph Technologies helps businesses scale through websites,
+              software, branding, and digital marketing — with a focus on
+              revenue, efficiency, and long-term growth.
             </p>
+            <div className="mt-6 flex gap-3">
+              <SocialLink
+                href={siteConfig.social.instagram}
+                label="Instagram"
+                icon={Instagram}
+              />
+              <SocialLink
+                href={siteConfig.social.linkedin}
+                label="LinkedIn"
+                icon={Linkedin}
+              />
+              <SocialLink
+                href={siteConfig.social.facebook}
+                label="Facebook"
+                icon={Facebook}
+              />
+            </div>
           </div>
 
-          <div className="flex gap-8 text-sm font-medium text-black/60">
-            <Link href="#about" className="hover:text-black transition-colors">About</Link>
-            <Link href="#services" className="hover:text-black transition-colors">Services</Link>
-            <Link href="#contact" className="hover:text-black transition-colors">Contact</Link>
-            <Link href="#" className="hover:text-black transition-colors">Privacy Policy</Link>
+          <div className="lg:col-span-2">
+            <p className="text-xs font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
+              Services
+            </p>
+            <ul className="mt-5 space-y-3">
+              {services.map((s) => (
+                <li key={s.id}>
+                  <Link
+                    href="#services"
+                    className="text-sm text-white/55 transition hover:text-white"
+                  >
+                    {s.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
 
-          <div className="text-black/50 text-sm">
-            © {new Date().getFullYear()} Duoph. All rights reserved.
+          <div className="lg:col-span-2">
+            <p className="text-xs font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
+              Resources
+            </p>
+            <ul className="mt-5 space-y-3">
+              {resourceLinks.map((l) => (
+                <li key={l.href}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-white/55 transition hover:text-white"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
+
+          <div className="lg:col-span-2">
+            <p className="text-xs font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
+              Company
+            </p>
+            <ul className="mt-5 space-y-3">
+              {companyLinks.map((l) => (
+                <li key={l.label}>
+                  <Link
+                    href={l.href}
+                    className="text-sm text-white/55 transition hover:text-white"
+                  >
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="lg:col-span-2">
+            <p className="text-xs font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
+              Newsletter
+            </p>
+            <p className="mt-5 text-sm text-white/50">
+              Occasional updates on digital growth — no spam.
+            </p>
+            <form onSubmit={onNewsletter} className="mt-4">
+              <div className="flex overflow-hidden rounded-full border border-white/15 bg-white/5">
+                <label htmlFor="newsletter" className="sr-only">
+                  Email for newsletter
+                </label>
+                <input
+                  id="newsletter"
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email address"
+                  className="min-w-0 flex-1 bg-transparent px-4 py-3 text-sm text-white placeholder:text-white/35 focus:outline-none"
+                />
+                <button
+                  type="submit"
+                  aria-label="Subscribe"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#18704E] text-white transition hover:brightness-110"
+                >
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+              {subscribed ? (
+                <p className="mt-2 text-xs text-emerald-300" role="status">
+                  Thanks — you&apos;re on the list.
+                </p>
+              ) : null}
+            </form>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
+          <p className="text-sm text-white/40">
+            © {new Date().getFullYear()} Duoph Technologies. All rights
+            reserved.
+          </p>
+          <p className="text-sm text-white/35">
+            Serving India, UAE, Saudi Arabia, Germany & the UK
+          </p>
         </div>
       </div>
     </footer>
   );
-};
+}
 
-export default Footer;
+function SocialLink({
+  href,
+  label,
+  icon: Icon,
+}: {
+  href: string;
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-emerald-400/40 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
+    >
+      <Icon className="h-4 w-4" />
+    </a>
+  );
+}

@@ -1,180 +1,152 @@
 "use client";
 
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Globe,
+  Cpu,
+  Smartphone,
+  Palette,
+  PenTool,
+  Megaphone,
+  ArrowRight,
+} from "lucide-react";
+import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { FadeIn } from "@/components/ui/FadeIn";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { services } from "@/data/services";
+import { cn } from "@/lib/utils";
 
-gsap.registerPlugin(ScrollTrigger);
+const icons = [Globe, Cpu, Smartphone, Palette, PenTool, Megaphone];
 
-type ServiceItem = {
-  title: string;
-  description: string;
-};
-
-const Services = () => {
-  const rootRef = useRef<HTMLElement | null>(null);
-  const services = useMemo<ServiceItem[]>(
-    () => [
-      {
-        title: "Branding",
-        description:
-          "Branding builds a strong identity that people remember. We craft positioning, messaging, and visual systems that stay consistent across every touchpoint.",
-      },
-      {
-        title: "Development",
-        description:
-          "We build fast, secure websites and web apps with clean architecture, strong performance, and scalable foundations that grow with your business.",
-      },
-      {
-        title: "UI/UX Design",
-        description:
-          "UI/UX design is designing digital interfaces for a great user experience.",
-      },
-      {
-        title: "Graphic Design",
-        description:
-          "From social creatives to brand assets, we produce sharp design that supports your message and keeps everything visually consistent.",
-      },
-      {
-        title: "SEO",
-        description:
-          "Technical SEO, on-page optimization, and content strategy that improves search visibility and drives qualified traffic over time.",
-      },
-    ],
-    [],
-  );
-
-  const [activeIndex, setActiveIndex] = useState(2);
-
-  useLayoutEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        "[data-services='heading']",
-        { opacity: 0, y: 18 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.75,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 80%", once: true },
-        },
-      );
-
-      gsap.fromTo(
-        "[data-services='row']",
-        { opacity: 0, y: 24 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.7,
-          ease: "power3.out",
-          stagger: 0.08,
-          scrollTrigger: { trigger: el, start: "top 70%", once: true },
-        },
-      );
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
-
-  const active = services[activeIndex];
-  const prev = () =>
-    setActiveIndex((i) => (i - 1 + services.length) % services.length);
-  const next = () => setActiveIndex((i) => (i + 1) % services.length);
+export default function Services() {
+  const [active, setActive] = useState(0);
+  const current = services[active];
+  const Icon = icons[active] ?? Globe;
 
   return (
-    <section
-      ref={rootRef}
-      id="services"
-      className="relative overflow-hidden py-24 text-black bg-white md:px-[110px] px-[20px]"
-    >
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute -left-24 -top-28 h-[420px] w-[420px] rounded-full bg-primary/18 blur-[120px]" />
-        <div className="absolute -right-28 -bottom-36 h-[520px] w-[520px] rounded-full bg-primary/10 blur-[140px]" />
-      </div>
+    <Section id="services" className="bg-[#FAFBFA]">
+      <SectionHeading
+        eyebrow="Services"
+        title={
+          <>
+            Everything you need to{" "}
+            <span className="text-[#18704E]">grow digitally</span>
+          </>
+        }
+        description="From your first website to full business automation — each service is scoped around who it's for and the commercial result it should deliver."
+      />
 
-      <div className="container mx-auto px-6">
-        <div
-          data-services="heading"
-          className="flex flex-col items-start gap-10 lg:flex-row lg:gap-16"
-        >
-          <div>
-            <div className="text-xs font-semibold tracking-widest text-[#18704e]">
-              OUR SERVICES
-            </div>
-            <h3 className="font-monument mt-5 text-4xl font-extrabold leading-[1.05] sm:text-5xl ">
-              What <span className="text-[#18704e]">Services</span>
-              <br />
-              We’re Offering
-            </h3>
-          </div>
-
-          <p className="max-w-xl text-sm leading-relaxed text-black lg:mt-2">
-            We offer services that can help businesses improve their visibility
-            and business reputation online, expand market reach, and increase
-            turnover through effective digital strategies. Following are the
-            services we provide.
-          </p>
-        </div>
-
-        <div className="mt-14 flex flex-col gap-10 lg:flex-row lg:items-center">
-          <div className="relative lg:flex-[1.35]">
-            <div className="divide-y divide-white/12 overflow-hidden rounded-3xl border border-white/12 bg-white/0">
-              {services.map((s, idx) => {
-                const isActive = idx === activeIndex;
-                return (
-                  <button
-                    key={s.title}
-                    type="button"
-                    data-services="row"
-                    onClick={() => setActiveIndex(idx)}
-                    className="group flex w-full items-center justify-between gap-10 px-6 py-7 text-left transition-colors hover:bg-white/2 md:px-8"
+      <div className="mt-14 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
+        <FadeIn>
+          <div
+            className="flex flex-col gap-2"
+            role="tablist"
+            aria-label="Services"
+          >
+            {services.map((service, i) => {
+              const SIcon = icons[i] ?? Globe;
+              const isActive = i === active;
+              return (
+                <button
+                  key={service.id}
+                  type="button"
+                  role="tab"
+                  aria-selected={isActive}
+                  onClick={() => setActive(i)}
+                  className={cn(
+                    "group flex w-full items-center gap-4 rounded-2xl border px-5 py-4 text-left transition duration-300",
+                    isActive
+                      ? "border-[#18704E]/30 bg-white shadow-[0_12px_40px_rgba(24,112,78,0.1)]"
+                      : "border-transparent bg-transparent hover:border-black/8 hover:bg-white/70",
+                  )}
+                >
+                  <span
+                    className={cn(
+                      "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition",
+                      isActive
+                        ? "bg-[#18704E] text-white"
+                        : "bg-black/5 text-black/50 group-hover:text-[#18704E]",
+                    )}
                   >
-                    <div className="min-w-0">
-                      <div
-                        className={[
-                          "font-monument text-3xl font-semibold tracking-tight md:text-4xl",
-                          isActive ? "text-[#18704e]" : "text-black",
-                        ].join(" ")}
-                      >
-                        {s.title}
-                        {isActive ? (
-                          <span className="text-[#18704e] ">.</span>
-                        ) : null}
-                      </div>
-
-                      {isActive ? (
-                        <p className="mt-3  leading-relaxed text-black md:hidden">
-                          {s.description}
-                        </p>
-                      ) : null}
-                    </div>
-
-                    <div className="hidden max-w-lg items-center gap-10 md:flex">
-                      <p
-                        className={[
-                          "text-[18px] leading-relaxed",
-                          isActive ? "text-black" : "text-black",
-                        ].join(" ")}
-                      >
-                        {s.description}
-                      </p>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-
-            
+                    <SIcon className="h-4 w-4" aria-hidden />
+                  </span>
+                  <span
+                    className={cn(
+                      "font-monument text-sm font-bold tracking-tight md:text-base",
+                      isActive ? "text-[#18704E]" : "text-black/70",
+                    )}
+                  >
+                    {service.title}
+                  </span>
+                </button>
+              );
+            })}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+        </FadeIn>
 
-export default Services;
+        <FadeIn delay={0.1}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={current.id}
+              role="tabpanel"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="h-full rounded-[28px] border border-black/8 bg-white p-8 shadow-[0_16px_50px_rgba(0,0,0,0.04)] md:p-10"
+            >
+              <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#18704E]/10 text-[#18704E]">
+                <Icon className="h-6 w-6" aria-hidden />
+              </div>
+              <h3 className="font-monument text-2xl font-bold tracking-tight text-black md:text-3xl">
+                {current.title}
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-black/60">
+                {current.summary}
+              </p>
+
+              <div className="mt-8 grid gap-5 sm:grid-cols-2">
+                <div className="rounded-2xl bg-[#FAFBFA] p-5">
+                  <p className="text-xs font-semibold tracking-widest text-[#18704E] uppercase">
+                    Who it&apos;s for
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-black/65">
+                    {current.forWhom}
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-[#FAFBFA] p-5">
+                  <p className="text-xs font-semibold tracking-widest text-[#18704E] uppercase">
+                    Business benefit
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-black/65">
+                    {current.benefit}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-8 flex flex-wrap gap-2">
+                {current.items.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full border border-black/8 px-3.5 py-1.5 text-xs font-medium text-black/60"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+
+              <div className="mt-10">
+                <MagneticButton href="#contact" variant="primary">
+                  Discuss this service
+                  <ArrowRight className="h-4 w-4" aria-hidden />
+                </MagneticButton>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+        </FadeIn>
+      </div>
+    </Section>
+  );
+}

@@ -1,58 +1,39 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { useState } from "react";
+import {
+  Mail,
+  Phone,
+  Clock,
+  MessageCircle,
+  Send,
+  Shield,
+  Timer,
+  Handshake,
+} from "lucide-react";
+import { Section } from "@/components/ui/Section";
+import { SectionHeading } from "@/components/ui/SectionHeading";
+import { FadeIn } from "@/components/ui/FadeIn";
+import { MagneticButton } from "@/components/ui/MagneticButton";
+import { siteConfig } from "@/data/site";
 
-gsap.registerPlugin(ScrollTrigger);
+const assurances = [
+  { icon: Handshake, label: "Free Consultation" },
+  { icon: Timer, label: "Response within 24 Hours" },
+  { icon: Shield, label: "No obligation · Privacy guaranteed" },
+];
 
-const Contact = () => {
-  const rootRef = useRef<HTMLElement | null>(null);
-  const [status, setStatus] = useState<
-    "idle" | "sending" | "sent" | "error"
-  >("idle");
+export default function Contact() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">(
+    "idle",
+  );
   const [error, setError] = useState<string | null>(null);
-
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
     message: "",
   });
-
-  useLayoutEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        "[data-contact='left']",
-        { opacity: 0, x: -24 },
-        {
-          opacity: 1,
-          x: 0,
-          duration: 0.85,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 75%", once: true },
-        }
-      );
-      gsap.fromTo(
-        "[data-contact='form']",
-        { opacity: 0, y: 18, scale: 0.98 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.75,
-          ease: "power3.out",
-          scrollTrigger: { trigger: el, start: "top 75%", once: true },
-        }
-      );
-    }, el);
-
-    return () => ctx.revert();
-  }, []);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -72,12 +53,7 @@ const Contact = () => {
       }
 
       setStatus("sent");
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
+      setForm({ name: "", email: "", phone: "", message: "" });
     } catch (err) {
       setStatus("error");
       setError(err instanceof Error ? err.message : "Failed to send");
@@ -85,121 +61,225 @@ const Contact = () => {
   }
 
   return (
-    <section ref={rootRef} id="contact" className="py-24 relative overflow-hidden md:px-[110px] px-[20px]">
-      {/* Background Glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/10 rounded-full blur-[120px] -z-10" />
+    <Section id="contact" className="bg-[#FAFBFA]">
+      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+        <FadeIn>
+          <SectionHeading
+            eyebrow="Contact"
+            title={
+              <>
+                Ready to grow?{" "}
+                <span className="text-[#18704E]">Let&apos;s talk.</span>
+              </>
+            }
+            description="Tell us about your business goals. We'll reply with a clear next step — usually within one business day."
+          />
 
-      <div className="container mx-auto px-6">
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          <div data-contact="left">
-            <h2 className="font-monument text-[#18704e] font-bold tracking-widest uppercase text-sm mb-4">Get in Touch</h2>
-            <h3 className="font-monument text-4xl md:text-5xl font-bold mb-8 text-black">Ready to grow your digital presence?</h3>
-            <p className="text-black/60 mb-12 text-lg">
-              Schedule a consultation today and let's discuss how we can help you achieve your business goals with modern tech solutions.
-            </p>
-
-            <div className="space-y-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 glass rounded-xl flex items-center justify-center text-primary">
-                  <Mail size={20} />
-                </div>
-                <div>
-                  <p className="text-xs text-black/40 uppercase tracking-widest font-bold">Email us</p>
-                  <p className="text-black font-medium">admin@duoph.in</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 glass rounded-xl flex items-center justify-center text-primary">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <p className="text-xs text-black/40 uppercase tracking-widest font-bold">Call us</p>
-                  <p className="text-black font-medium">+91 9400244731</p>
-                </div>
-              </div>
-          
-            </div>
+          <div className="mt-10 space-y-5">
+            <ContactRow
+              icon={Mail}
+              label="Email"
+              value={siteConfig.email}
+              href={`mailto:${siteConfig.email}`}
+            />
+            <ContactRow
+              icon={Phone}
+              label="Phone"
+              value={siteConfig.phone}
+              href={siteConfig.phoneHref}
+            />
+            <ContactRow
+              icon={MessageCircle}
+              label="WhatsApp"
+              value="Chat with us"
+              href={siteConfig.whatsapp}
+            />
+            <ContactRow
+              icon={Clock}
+              label="Office Hours"
+              value={siteConfig.officeHours}
+            />
           </div>
 
-          <div data-contact="form" className="glass p-8 md:p-12 rounded-[40px] border border-black/10 relative">
-            <form className="space-y-6" onSubmit={onSubmit}>
-              <div className="grid md:grid-cols-2 gap-6">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium     text-[#18704e] ml-1">Name</label>
-                  <input 
-                    type="text" 
-                    className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
-                    placeholder="Your Name"
-                    value={form.name}
-                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                    required
-                  />
-                </div>
-                <div className="space-y-2">
-                    <label className="text-sm font-medium text-[#18704e] ml-1">Email</label>
-                  <input 
-                    type="email" 
-                    className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
-                    placeholder="Your Email"
-                    value={form.email}
-                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                    required
-                  />
-                </div>
-                <div className="space-y-2 md:col-span-2">
-                  <label className="text-sm font-medium text-[#18704e] ml-1">Contact Number</label>
-                  <input
-                    type="tel"
-                    inputMode="numeric"
-                    autoComplete="tel"
-                    pattern="[0-9]*"
-                    className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black"
-                    placeholder="Your Contact Number"
-                    value={form.phone}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        phone: e.target.value.replace(/\D/g, ""),
-                      }))
-                    }
-                  />
-                </div>
-              </div>
+          <div className="mt-10 overflow-hidden rounded-[24px] border border-black/8 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
+            <iframe
+              title="Duoph office location map"
+              src="https://maps.google.com/maps?q=India&t=&z=5&ie=UTF8&iwloc=&output=embed"
+              className="h-48 w-full grayscale contrast-125"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+        </FadeIn>
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-[#18704e] ml-1">Message</label>
-                <textarea 
-                  rows={4}
-                  className="w-full bg-white border border-black/10 rounded-2xl px-6 py-4 focus:outline-none focus:border-primary/40 transition-colors text-black resize-none"
-                  placeholder="Tell us about your project..."
-                  value={form.message}
-                  onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+        <FadeIn delay={0.1}>
+          <div className="rounded-[32px] border border-black/8 bg-white p-8 shadow-[0_20px_60px_rgba(0,0,0,0.05)] md:p-10">
+            <div className="mb-8 flex flex-wrap gap-3">
+              {assurances.map(({ icon: Icon, label }) => (
+                <span
+                  key={label}
+                  className="inline-flex items-center gap-2 rounded-full border border-[#18704E]/15 bg-[#18704E]/6 px-3.5 py-1.5 text-xs font-medium text-[#18704E]"
+                >
+                  <Icon className="h-3.5 w-3.5" aria-hidden />
+                  {label}
+                </span>
+              ))}
+            </div>
+
+            <form className="space-y-5" onSubmit={onSubmit} noValidate>
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field
+                  label="Name"
+                  id="name"
                   required
+                  value={form.name}
+                  onChange={(v) => setForm((f) => ({ ...f, name: v }))}
+                  placeholder="Your name"
+                />
+                <Field
+                  label="Email"
+                  id="email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={(v) => setForm((f) => ({ ...f, email: v }))}
+                  placeholder="you@company.com"
+                />
+              </div>
+              <Field
+                label="Phone"
+                id="phone"
+                type="tel"
+                value={form.phone}
+                onChange={(v) =>
+                  setForm((f) => ({ ...f, phone: v.replace(/\D/g, "") }))
+                }
+                placeholder="Your contact number"
+              />
+              <div className="space-y-2">
+                <label
+                  htmlFor="message"
+                  className="ml-1 text-sm font-medium text-[#18704E]"
+                >
+                  Message
+                </label>
+                <textarea
+                  id="message"
+                  rows={4}
+                  required
+                  value={form.message}
+                  onChange={(e) =>
+                    setForm((f) => ({ ...f, message: e.target.value }))
+                  }
+                  placeholder="What are you looking to build or improve?"
+                  className="w-full resize-none rounded-2xl border border-black/10 bg-white px-5 py-4 text-black transition focus:border-[#18704E]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/25"
                 />
               </div>
 
               {status !== "idle" ? (
-                <div className="text-sm text-black/60">
-                  {status === "sending" ? "Sending..." : null}
-                  {status === "sent" ? "Sent. We’ll get back to you shortly." : null}
-                  {status === "error" ? (error || "Failed to send") : null}
-                </div>
+                <p
+                  className={`text-sm ${
+                    status === "error" ? "text-red-600" : "text-black/55"
+                  }`}
+                  role="status"
+                >
+                  {status === "sending" ? "Sending…" : null}
+                  {status === "sent"
+                    ? "Sent. We'll get back to you within 24 hours."
+                    : null}
+                  {status === "error" ? error || "Failed to send" : null}
+                </p>
               ) : null}
 
-              <button
+              <MagneticButton
+                type="submit"
+                variant="primary"
                 disabled={status === "sending"}
-                className="w-full py-4 bg-[#18704e] disabled:opacity-60 disabled:cursor-not-allowed hover:brightness-110 text-white rounded-2xl font-bold flex items-center justify-center gap-2 transition-all shadow-xl shadow-primary/20 group"
+                className="w-full"
               >
-                Send Message{" "}
-                <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
+                Book a Free Consultation
+                <Send className="h-4 w-4" aria-hidden />
+              </MagneticButton>
             </form>
           </div>
-        </div>
+        </FadeIn>
       </div>
-    </section>
+    </Section>
   );
-};
+}
 
-export default Contact;
+function ContactRow({
+  icon: Icon,
+  label,
+  value,
+  href,
+}: {
+  icon: React.ComponentType<{ className?: string; size?: number }>;
+  label: string;
+  value: string;
+  href?: string;
+}) {
+  const content = (
+    <>
+      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-black/8 bg-white text-[#18704E] shadow-sm">
+        <Icon size={18} aria-hidden />
+      </div>
+      <div>
+        <p className="text-xs font-bold tracking-widest text-black/35 uppercase">
+          {label}
+        </p>
+        <p className="font-medium text-black">{value}</p>
+      </div>
+    </>
+  );
 
+  if (href) {
+    return (
+      <a
+        href={href}
+        target={href.startsWith("http") ? "_blank" : undefined}
+        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+        className="flex items-center gap-4 rounded-2xl transition hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/40"
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return <div className="flex items-center gap-4">{content}</div>;
+}
+
+function Field({
+  label,
+  id,
+  value,
+  onChange,
+  placeholder,
+  type = "text",
+  required,
+}: {
+  label: string;
+  id: string;
+  value: string;
+  onChange: (v: string) => void;
+  placeholder: string;
+  type?: string;
+  required?: boolean;
+}) {
+  return (
+    <div className="space-y-2">
+      <label htmlFor={id} className="ml-1 text-sm font-medium text-[#18704E]">
+        {label}
+      </label>
+      <input
+        id={id}
+        type={type}
+        required={required}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="w-full rounded-2xl border border-black/10 bg-white px-5 py-4 text-black transition focus:border-[#18704E]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/25"
+      />
+    </div>
+  );
+}
