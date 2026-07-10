@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRef } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLiteMotion } from "@/hooks/useLiteMotion";
 
 type MagneticButtonProps = {
   href?: string;
@@ -26,6 +27,7 @@ export function MagneticButton({
   onClick,
   ariaLabel,
 }: MagneticButtonProps) {
+  const lite = useLiteMotion();
   const ref = useRef<HTMLDivElement>(null);
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -33,6 +35,7 @@ export function MagneticButton({
   const springY = useSpring(y, { stiffness: 280, damping: 20 });
 
   function onMove(e: React.MouseEvent) {
+    if (lite) return;
     const el = ref.current;
     if (!el) return;
     const rect = el.getBoundingClientRect();
@@ -49,7 +52,7 @@ export function MagneticButton({
 
   const styles = {
     primary:
-      "bg-[#18704E] text-white shadow-[0_12px_40px_rgba(24,112,78,0.28)] hover:brightness-110",
+      "bg-[#18704E] text-white shadow-[0_8px_28px_rgba(24,112,78,0.22)] active:brightness-95 hover:brightness-110",
     secondary:
       "border border-white/35 bg-transparent text-white hover:border-white/55 hover:bg-white/5",
     ghost:
@@ -57,25 +60,29 @@ export function MagneticButton({
     dark: "bg-black text-white hover:bg-black/90",
   }[variant];
 
-  const inner = (
+  const innerClass = cn(
+    "inline-flex w-full items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-colors duration-200 sm:px-7",
+    styles,
+    disabled && "pointer-events-none opacity-60",
+    className,
+  );
+
+  const inner = lite ? (
+    <span className={innerClass}>{children}</span>
+  ) : (
     <motion.div
       ref={ref}
       style={{ x: springX, y: springY }}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
-      className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-colors duration-300",
-        styles,
-        disabled && "pointer-events-none opacity-60",
-        className,
-      )}
+      className={innerClass}
     >
       {children}
     </motion.div>
   );
 
   const wrapperClass = cn(
-    "inline-flex rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/50 focus-visible:ring-offset-2",
+    "inline-flex touch-manipulation rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/50 focus-visible:ring-offset-2",
     className?.includes("w-full") && "w-full",
   );
 

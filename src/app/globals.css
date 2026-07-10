@@ -71,6 +71,8 @@
 body {
   font-family: var(--font-sans);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
 }
 
 @layer base {
@@ -82,7 +84,7 @@ body {
   }
   html {
     @apply font-sans;
-    scroll-padding-top: 6rem;
+    scroll-padding-top: 5.5rem;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -90,12 +92,26 @@ body {
       scroll-behavior: smooth;
     }
   }
+
+  @media (max-width: 767px) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+
   button,
   input,
   textarea,
   select,
   optgroup {
     font: inherit;
+  }
+
+  img,
+  svg,
+  video {
+    max-width: 100%;
+    height: auto;
   }
 }
 
@@ -132,6 +148,32 @@ body {
     mix-blend-mode: overlay;
   }
 
+  @media (max-width: 767px) {
+    .noise {
+      display: none;
+    }
+
+    .hero-aurora {
+      display: none;
+    }
+
+    .animate-marquee {
+      animation-duration: 55s;
+    }
+
+    .glass,
+    .glass-dark {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-marquee {
+      animation: none;
+    }
+  }
+
   .hero-dark-gradient {
     background:
       radial-gradient(ellipse 80% 60% at 70% 40%, rgba(24, 112, 78, 0.36), transparent 55%),
@@ -166,12 +208,6 @@ body {
 
   .animate-marquee {
     animation: marquee 42s linear infinite;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .animate-marquee {
-      animation: none;
-    }
   }
 
   .grid-overlay {

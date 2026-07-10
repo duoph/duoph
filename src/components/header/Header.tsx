@@ -47,7 +47,7 @@ const Header = () => {
       <div className="pointer-events-auto w-full max-w-5xl">
         <nav
           ref={navRef}
-          className={`flex items-center justify-between gap-4 rounded-[20px] bg-white/95 px-5 py-3.5 backdrop-blur-xl transition-shadow duration-300 md:px-7 md:py-3.5 ${
+          className={`flex items-center justify-between gap-4 rounded-[20px] bg-white px-4 py-3 shadow-[0_10px_40px_rgba(0,0,0,0.08)] transition-shadow duration-300 sm:px-5 sm:py-3.5 md:px-7 md:backdrop-blur-xl md:bg-white/95 ${
             scrolled
               ? "shadow-[0_12px_48px_rgba(0,0,0,0.12)]"
               : "shadow-[0_10px_40px_rgba(0,0,0,0.08)]"

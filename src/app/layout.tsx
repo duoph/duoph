@@ -5,9 +5,10 @@ import SmoothScroll from "@/components/SmoothScroll";
 
 const poppins = Poppins({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-poppins",
   display: "swap",
+  preload: true,
 });
 
 const siteUrl = "https://www.duoph.in";
@@ -118,7 +119,7 @@ export default function RootLayout({
       <body className={`${poppins.className} antialiased`}>
         <div
           aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+          className="pointer-events-none fixed inset-0 -z-10 hidden overflow-hidden md:block"
         >
           <div className="absolute top-1/3 left-0 h-44 w-44 -translate-x-1/2 rounded-full bg-[#18704E]/18 blur-3xl md:h-56 md:w-56" />
           <div className="absolute top-2/3 right-0 h-44 w-44 translate-x-1/2 rounded-full bg-[#18704E]/18 blur-3xl md:h-56 md:w-56" />

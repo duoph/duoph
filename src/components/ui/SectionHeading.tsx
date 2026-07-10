@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLiteMotion } from "@/hooks/useLiteMotion";
 
 type SectionHeadingProps = {
   eyebrow?: string;
@@ -20,18 +21,10 @@ export function SectionHeading({
   className,
   light = false,
 }: SectionHeadingProps) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className={cn(
-        "max-w-3xl",
-        align === "center" && "mx-auto text-center",
-        className,
-      )}
-    >
+  const lite = useLiteMotion();
+
+  const content = (
+    <>
       {eyebrow ? (
         <p
           className={cn(
@@ -61,6 +54,28 @@ export function SectionHeading({
           {description}
         </p>
       ) : null}
+    </>
+  );
+
+  const classes = cn(
+    "max-w-3xl",
+    align === "center" && "mx-auto text-center",
+    className,
+  );
+
+  if (lite) {
+    return <div className={classes}>{content}</div>;
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className={classes}
+    >
+      {content}
     </motion.div>
   );
 }

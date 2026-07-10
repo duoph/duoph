@@ -172,7 +172,7 @@ export default function Contact() {
                     setForm((f) => ({ ...f, message: e.target.value }))
                   }
                   placeholder="What are you looking to build or improve?"
-                  className="w-full resize-none rounded-2xl border border-black/10 bg-white px-5 py-4 text-black transition focus:border-[#18704E]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/25"
+                  className="w-full resize-none rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-base text-black transition focus:border-[#18704E]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/25 sm:px-5 sm:py-4"
                 />
               </div>
 
@@ -278,7 +278,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-2xl border border-black/10 bg-white px-5 py-4 text-black transition focus:border-[#18704E]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/25"
+        className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-base text-black transition focus:border-[#18704E]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/25 sm:px-5 sm:py-4"
       />
     </div>
   );

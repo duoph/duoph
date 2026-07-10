@@ -31,7 +31,7 @@ export default function FeaturedProjects() {
         </FadeIn>
       </div>
 
-      <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-10 grid gap-4 sm:mt-14 sm:gap-6 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project, i) => (
           <ProjectCard key={project.id} project={project} index={i} />
         ))}
@@ -47,8 +47,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
     <FadeIn delay={index * 0.06}>
       <article
         className={cn(
-          "group relative flex h-full flex-col overflow-hidden rounded-[28px] border border-black/8 bg-white shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-500",
-          "hover:-translate-y-2 hover:border-[#18704E]/25 hover:shadow-[0_24px_60px_rgba(24,112,78,0.12)]",
+          "group relative flex h-full flex-col overflow-hidden rounded-[22px] border border-black/8 bg-white shadow-[0_8px_40px_rgba(0,0,0,0.04)] transition-all duration-300 sm:rounded-[28px]",
+          "md:hover:-translate-y-2 md:hover:border-[#18704E]/25 md:hover:shadow-[0_24px_60px_rgba(24,112,78,0.12)]",
         )}
       >
         <div
@@ -60,7 +60,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="noise absolute inset-0 opacity-20" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.18),transparent_50%)]" />
           <motion.div
-            className="absolute inset-0 flex items-center justify-center transition-transform duration-700 group-hover:scale-110"
+            className="absolute inset-0 flex items-center justify-center md:transition-transform md:duration-700 md:group-hover:scale-110"
             aria-hidden
           >
             <span className="font-monument text-3xl font-bold tracking-tight text-white/90 md:text-4xl">
@@ -86,7 +86,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="pointer-events-none absolute inset-0 rounded-[inherit] ring-0 transition duration-500 group-hover:ring-2 group-hover:ring-[#18704E]/35 group-hover:ring-inset" />
         </div>
 
-        <div className="flex flex-1 flex-col p-6 md:p-7">
+        <div className="flex flex-1 flex-col p-5 sm:p-6 md:p-7">
           <h3 className="font-monument text-xl font-bold tracking-tight text-black">
             {project.name}
           </h3>

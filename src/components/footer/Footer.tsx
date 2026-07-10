@@ -39,13 +39,13 @@ export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden border-t border-black/8 bg-[#050f0b] text-white">
-      <div className="absolute inset-0">
+      <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden>
         <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-[#18704E]/20 blur-[100px]" />
         <div className="noise absolute inset-0 opacity-[0.1]" />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-5 pt-16 pb-10 md:px-10 lg:px-12">
-        <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-12 pb-8 sm:px-5 sm:pt-16 sm:pb-10 md:px-10 lg:px-12">
+        <div className="grid gap-10 sm:gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
             <Link href="/" className="inline-block">
               <Image

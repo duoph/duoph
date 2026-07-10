@@ -2,6 +2,7 @@
 
 import { motion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useLiteMotion } from "@/hooks/useLiteMotion";
 
 type FadeInProps = HTMLMotionProps<"div"> & {
   delay?: number;
@@ -14,16 +15,23 @@ export function FadeIn({
   children,
   className,
   delay = 0,
-  y = 24,
+  y = 16,
   ...props
 }: FadeInProps) {
+  const lite = useLiteMotion();
+
+  // Mobile / touch: render immediately — never hide behind opacity:0
+  if (lite) {
+    return <div className={cn(className)}>{children}</div>;
+  }
+
   return (
     <motion.div
-      initial={{ opacity: 0, y }}
+      initial={{ opacity: 1, y }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
+      viewport={{ once: true, margin: "-40px" }}
       transition={{
-        duration: 0.7,
+        duration: 0.5,
         delay,
         ease: [0.22, 1, 0.36, 1],
       }}

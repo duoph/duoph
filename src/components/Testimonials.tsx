@@ -23,7 +23,7 @@ export default function Testimonials() {
 
   return (
     <Section id="testimonials" dark>
-      <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden>
         <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-[#18704E]/18 blur-[110px]" />
         <div className="noise absolute inset-0 opacity-[0.1]" />
       </div>
