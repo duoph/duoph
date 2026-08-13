@@ -28,17 +28,24 @@ export function SectionHeading({
       {eyebrow ? (
         <p
           className={cn(
-            "mb-4 text-xs font-semibold tracking-[0.2em] uppercase",
+            "mb-5 inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] uppercase",
             light ? "text-emerald-300/90" : "text-[#18704E]",
           )}
         >
+          <span
+            className={cn(
+              "h-px w-8",
+              light ? "bg-emerald-300/60" : "bg-[#18704E]/60",
+            )}
+            aria-hidden
+          />
           {eyebrow}
         </p>
       ) : null}
       <h2
         className={cn(
-          "font-monument text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl",
-          light ? "text-white" : "text-black",
+          "font-monument text-[1.75rem] leading-[1.12] font-bold tracking-tight sm:text-4xl md:text-5xl lg:text-[3.25rem]",
+          light ? "text-white" : "text-ink",
         )}
       >
         {title}
@@ -46,9 +53,9 @@ export function SectionHeading({
       {description ? (
         <p
           className={cn(
-            "mt-5 text-base leading-relaxed md:text-lg",
-            light ? "text-white/65" : "text-black/55",
-            align === "center" && "mx-auto max-w-2xl",
+            "mt-5 max-w-xl text-[15px] leading-relaxed sm:text-base md:text-lg",
+            light ? "text-white/60" : "text-ink/55",
+            align === "center" && "mx-auto",
           )}
         >
           {description}
@@ -69,10 +76,10 @@ export function SectionHeading({
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
       className={classes}
     >
       {content}

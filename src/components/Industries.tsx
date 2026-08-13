@@ -28,9 +28,8 @@ const icons = [
 
 export default function Industries() {
   return (
-    <Section id="industries">
+    <Section id="industries" className="bg-white">
       <SectionHeading
-        align="center"
         eyebrow="Industries"
         title={
           <>
@@ -38,23 +37,23 @@ export default function Industries() {
             <span className="text-[#18704E]">we serve every day</span>
           </>
         }
-        description="We understand the pressures of operators, founders, and teams across sectors — and we design solutions around how they actually work."
-        className="mx-auto"
+        description="We design around how operators, founders, and teams actually work — across sectors."
       />
 
-      <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-3xl border border-ink/8 bg-ink/8 sm:grid-cols-2 lg:grid-cols-4">
         {industries.map((industry, i) => {
           const Icon = icons[i] ?? Briefcase;
           return (
             <FadeIn key={industry.id} delay={i * 0.04}>
-              <article className="group h-full rounded-[24px] border border-black/8 bg-white p-6 transition duration-400 hover:-translate-y-1.5 hover:border-[#18704E]/25 hover:shadow-[0_20px_50px_rgba(24,112,78,0.08)]">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl border border-black/6 bg-[#FAFBFA] text-[#18704E] transition group-hover:border-[#18704E]/20 group-hover:bg-[#18704E] group-hover:text-white">
-                  <Icon className="h-5 w-5" aria-hidden />
-                </div>
-                <h3 className="font-monument text-base font-bold tracking-tight text-black">
+              <article className="group h-full bg-white p-6 transition duration-300 hover:bg-[#050f0b] sm:p-7">
+                <Icon
+                  className="h-5 w-5 text-[#18704E] transition group-hover:text-emerald-300"
+                  aria-hidden
+                />
+                <h3 className="font-monument mt-5 text-base font-bold tracking-tight text-ink transition group-hover:text-white">
                   {industry.title}
                 </h3>
-                <p className="mt-2.5 text-sm leading-relaxed text-black/55">
+                <p className="mt-2.5 text-sm leading-relaxed text-ink/55 transition group-hover:text-white/55">
                   {industry.description}
                 </p>
               </article>

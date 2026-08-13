@@ -121,13 +121,6 @@ export default function RootLayout({
   return (
     <html lang="en" className={poppins.variable}>
       <body className={`${poppins.className} antialiased`}>
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10 hidden overflow-hidden md:block"
-        >
-          <div className="absolute top-1/3 left-0 h-44 w-44 -translate-x-1/2 rounded-full bg-[#18704E]/18 blur-3xl md:h-56 md:w-56" />
-          <div className="absolute top-2/3 right-0 h-44 w-44 translate-x-1/2 rounded-full bg-[#18704E]/18 blur-3xl md:h-56 md:w-56" />
-        </div>
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

@@ -9,7 +9,7 @@ import { useLiteMotion } from "@/hooks/useLiteMotion";
 type MagneticButtonProps = {
   href?: string;
   children: React.ReactNode;
-  variant?: "primary" | "secondary" | "ghost" | "dark";
+  variant?: "primary" | "secondary" | "ghost" | "dark" | "outline-dark";
   className?: string;
   type?: "button" | "submit";
   disabled?: boolean;
@@ -52,12 +52,14 @@ export function MagneticButton({
 
   const styles = {
     primary:
-      "bg-[#18704E] text-white shadow-[0_8px_28px_rgba(24,112,78,0.22)] active:brightness-95 hover:brightness-110",
+      "bg-[#18704E] text-white shadow-[0_10px_32px_rgba(24,112,78,0.28)] hover:bg-[#146041]",
     secondary:
-      "border border-white/35 bg-transparent text-white hover:border-white/55 hover:bg-white/5",
+      "border border-white/30 bg-white/5 text-white backdrop-blur-sm hover:border-white/50 hover:bg-white/10",
     ghost:
-      "border border-black/12 bg-white text-black hover:border-[#18704E]/40 hover:text-[#18704E]",
-    dark: "bg-black text-white hover:bg-black/90",
+      "border border-ink/12 bg-white text-ink hover:border-[#18704E]/40 hover:text-[#18704E]",
+    dark: "bg-ink text-white hover:bg-ink/90",
+    "outline-dark":
+      "border border-ink/15 bg-transparent text-ink hover:border-[#18704E] hover:text-[#18704E]",
   }[variant];
 
   const innerClass = cn(

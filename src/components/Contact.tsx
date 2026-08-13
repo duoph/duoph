@@ -61,21 +61,22 @@ export default function Contact() {
   }
 
   return (
-    <Section id="contact" className="bg-[#FAFBFA]">
-      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16">
+    <Section id="contact" dark className="!bg-[#050f0b]" grid>
+      <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
         <FadeIn>
           <SectionHeading
+            light
             eyebrow="Contact"
             title={
               <>
                 Ready to grow?{" "}
-                <span className="text-[#18704E]">Let&apos;s talk.</span>
+                <span className="text-emerald-300">Let&apos;s talk.</span>
               </>
             }
             description="Tell us about your business goals. We'll reply with a clear next step — usually within one business day."
           />
 
-          <div className="mt-10 space-y-5">
+          <div className="mt-10 space-y-1">
             <ContactRow
               icon={Mail}
               label="Email"
@@ -100,27 +101,17 @@ export default function Contact() {
               value={siteConfig.officeHours}
             />
           </div>
-
-          <div className="mt-10 overflow-hidden rounded-[24px] border border-black/8 bg-white shadow-[0_8px_30px_rgba(0,0,0,0.04)]">
-            <iframe
-              title="Duoph office location map"
-              src="https://maps.google.com/maps?q=India&t=&z=5&ie=UTF8&iwloc=&output=embed"
-              className="h-48 w-full grayscale contrast-125"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
-          </div>
         </FadeIn>
 
         <FadeIn delay={0.1}>
-          <div className="rounded-[32px] border border-black/8 bg-white p-8 shadow-[0_20px_60px_rgba(0,0,0,0.05)] md:p-10">
-            <div className="mb-8 flex flex-wrap gap-3">
+          <div className="rounded-3xl border border-white/10 bg-white/[0.03] p-7 sm:p-9">
+            <div className="mb-8 flex flex-wrap gap-2">
               {assurances.map(({ icon: Icon, label }) => (
                 <span
                   key={label}
-                  className="inline-flex items-center gap-2 rounded-full border border-[#18704E]/15 bg-[#18704E]/6 px-3.5 py-1.5 text-xs font-medium text-[#18704E]"
+                  className="inline-flex items-center gap-2 rounded-full border border-white/12 px-3 py-1.5 text-xs font-medium text-white/70"
                 >
-                  <Icon className="h-3.5 w-3.5" aria-hidden />
+                  <Icon className="h-3.5 w-3.5 text-emerald-300" aria-hidden />
                   {label}
                 </span>
               ))}
@@ -159,7 +150,7 @@ export default function Contact() {
               <div className="space-y-2">
                 <label
                   htmlFor="message"
-                  className="ml-1 text-sm font-medium text-[#18704E]"
+                  className="text-sm font-medium text-emerald-300/90"
                 >
                   Message
                 </label>
@@ -172,14 +163,14 @@ export default function Contact() {
                     setForm((f) => ({ ...f, message: e.target.value }))
                   }
                   placeholder="What are you looking to build or improve?"
-                  className="w-full resize-none rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-base text-black transition focus:border-[#18704E]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/25 sm:px-5 sm:py-4"
+                  className="w-full resize-none rounded-2xl border border-white/12 bg-white/5 px-4 py-3.5 text-base text-white placeholder:text-white/30 transition focus:border-emerald-400/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/25 sm:px-5 sm:py-4"
                 />
               </div>
 
               {status !== "idle" ? (
                 <p
                   className={`text-sm ${
-                    status === "error" ? "text-red-600" : "text-black/55"
+                    status === "error" ? "text-red-400" : "text-white/55"
                   }`}
                   role="status"
                 >
@@ -221,14 +212,14 @@ function ContactRow({
 }) {
   const content = (
     <>
-      <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-black/8 bg-white text-[#18704E] shadow-sm">
+      <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/12 text-emerald-300">
         <Icon size={18} aria-hidden />
       </div>
       <div>
-        <p className="text-xs font-bold tracking-widest text-black/35 uppercase">
+        <p className="text-[11px] font-bold tracking-widest text-white/35 uppercase">
           {label}
         </p>
-        <p className="font-medium text-black">{value}</p>
+        <p className="font-medium text-white">{value}</p>
       </div>
     </>
   );
@@ -239,14 +230,14 @@ function ContactRow({
         href={href}
         target={href.startsWith("http") ? "_blank" : undefined}
         rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-        className="flex items-center gap-4 rounded-2xl transition hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/40"
+        className="flex items-center gap-4 rounded-2xl py-3 transition hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/40"
       >
         {content}
       </a>
     );
   }
 
-  return <div className="flex items-center gap-4">{content}</div>;
+  return <div className="flex items-center gap-4 py-3">{content}</div>;
 }
 
 function Field({
@@ -268,7 +259,7 @@ function Field({
 }) {
   return (
     <div className="space-y-2">
-      <label htmlFor={id} className="ml-1 text-sm font-medium text-[#18704E]">
+      <label htmlFor={id} className="text-sm font-medium text-emerald-300/90">
         {label}
       </label>
       <input
@@ -278,7 +269,7 @@ function Field({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3.5 text-base text-black transition focus:border-[#18704E]/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/25 sm:px-5 sm:py-4"
+        className="w-full rounded-2xl border border-white/12 bg-white/5 px-4 py-3.5 text-base text-white placeholder:text-white/30 transition focus:border-emerald-400/40 focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/25 sm:px-5 sm:py-4"
       />
     </div>
   );

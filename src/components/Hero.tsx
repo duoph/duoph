@@ -1,40 +1,94 @@
 "use client";
 
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { MagneticButton } from "@/components/ui/MagneticButton";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
-import { Badge } from "@/components/ui/Badge";
-import { heroStats } from "@/data/site";
 import { useLiteMotion } from "@/hooks/useLiteMotion";
 
 const Hero = () => {
   const lite = useLiteMotion();
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [0, lite ? 0 : 140]);
+  const opacity = useTransform(scrollYProgress, [0, 0.7], [1, lite ? 1 : 0]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1, lite ? 1 : 1.08]);
+  const brandY = useTransform(scrollYProgress, [0, 1], [0, lite ? 0 : -60]);
 
   return (
-    <section className="relative flex min-h-[100svh] items-center overflow-hidden px-4 pt-24 pb-16 text-white sm:px-5 sm:pt-28 sm:pb-20 md:px-10 lg:px-12">
-      <HeroBackground lite={lite} />
+    <section
+      ref={ref}
+      className="relative flex min-h-[100svh] items-end overflow-hidden text-white"
+    >
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{ scale }}
+        aria-hidden
+      >
+        <div className="hero-mesh absolute inset-0" />
+        {!lite ? <div className="hero-aurora" /> : null}
+        <div className="absolute inset-0 bg-linear-to-t from-[#030a07] via-transparent to-black/20" />
+        {!lite ? (
+          <div className="noise pointer-events-none absolute inset-0 opacity-[0.14]" />
+        ) : null}
+      </motion.div>
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl">
-        <div className="max-w-3xl">
-          <div>
-            <Badge light>
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-              Duoph Technologies
-            </Badge>
-          </div>
+      {/* Full-bleed atmospheric brand plane */}
+      <motion.div
+        style={{ y: brandY, opacity }}
+        className="pointer-events-none absolute inset-x-0 top-[18%] z-[1] select-none px-2 sm:top-[14%] md:top-[10%]"
+        aria-hidden
+      >
+        <p className="font-monument text-center text-[18vw] leading-none font-bold tracking-[-0.04em] text-white/[0.07] sm:text-[16vw] md:text-[14vw]">
+          DUOPH
+        </p>
+      </motion.div>
 
-          <h1 className="font-monument mt-6 text-[2rem] leading-[1.08] font-bold tracking-tight xs:text-4xl sm:mt-8 sm:text-5xl md:text-6xl lg:text-[4.35rem]">
-            Technology That Moves{" "}
-            <span className="text-emerald-300">Businesses</span> Forward.
-          </h1>
+      <motion.div
+        style={{ y, opacity }}
+        className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-16 sm:px-6 sm:pb-20 md:px-10 md:pb-24 lg:px-12"
+      >
+        <div className="max-w-3xl pt-32 sm:pt-36">
+          <motion.p
+            initial={lite ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="mb-5 inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.24em] text-emerald-300/90 uppercase"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            Duoph Technologies
+          </motion.p>
 
-          <p className="mt-5 max-w-xl text-[15px] leading-relaxed text-white/70 sm:mt-6 sm:text-base md:text-lg">
-            We help businesses attract customers, automate operations, and build
-            software that scales — so you grow revenue without drowning in
-            manual work.
-          </p>
+          <motion.h1
+            initial={lite ? false : { opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+            className="font-monument text-[2.15rem] leading-[1.05] font-bold tracking-tight xs:text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem]"
+          >
+            Technology that moves{" "}
+            <span className="text-emerald-300">businesses</span> forward.
+          </motion.h1>
 
-          <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+          <motion.p
+            initial={lite ? false : { opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-5 max-w-lg text-[15px] leading-relaxed text-white/65 sm:mt-6 sm:text-base md:text-lg"
+          >
+            Attract customers, automate operations, and ship software that
+            scales — without drowning in manual work.
+          </motion.p>
+
+          <motion.div
+            initial={lite ? false : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+            className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:items-center sm:gap-4"
+          >
             <MagneticButton
               href="#contact"
               variant="primary"
@@ -51,58 +105,22 @@ const Hero = () => {
               View Our Work
               <ArrowUpRight className="h-4 w-4" aria-hidden />
             </MagneticButton>
-          </div>
-
-          <div
-            className="mt-10 grid grid-cols-2 gap-5 border-t border-white/10 pt-8 sm:mt-14 sm:gap-8 sm:pt-10 sm:grid-cols-4"
-            aria-label="Company trust metrics"
-          >
-            {heroStats.map((stat) => (
-              <div key={stat.label}>
-                <p className="font-monument text-2xl font-bold tracking-tight text-white sm:text-3xl md:text-4xl">
-                  {lite ? (
-                    <>
-                      {stat.value}
-                      {stat.suffix}
-                    </>
-                  ) : (
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                  )}
-                </p>
-                <p className="mt-1 text-[11px] font-medium tracking-wide text-white/50 uppercase sm:mt-1.5 sm:text-xs md:text-sm md:normal-case md:tracking-normal">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
+          </motion.div>
         </div>
-      </div>
+
+        <motion.div
+          initial={lite ? false : { opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          className="mt-14 hidden items-center gap-3 text-xs tracking-[0.2em] text-white/35 uppercase sm:flex"
+          aria-hidden
+        >
+          <span className="h-8 w-px bg-white/20" />
+          Scroll
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
-
-function HeroBackground({ lite }: { lite: boolean }) {
-  return (
-    <div className="absolute inset-0 z-0" aria-hidden>
-      <div className="hero-dark-gradient absolute inset-0" />
-      {/* Heavy blurs only on desktop — major mobile GPU cost */}
-      {!lite ? (
-        <>
-          <div className="hero-aurora absolute inset-0 opacity-80" />
-          <div className="absolute top-[12%] left-[4%] h-[480px] w-[480px] rounded-full bg-[#18704E]/28 blur-[120px]" />
-          <div className="absolute right-[2%] bottom-[8%] h-[520px] w-[520px] rounded-full bg-emerald-400/12 blur-[130px]" />
-          <div className="pointer-events-none absolute inset-0">
-            <div className="absolute top-[22%] right-[12%] h-24 w-24 rounded-3xl border border-white/10 bg-white/5" />
-            <div className="absolute bottom-[28%] left-[8%] h-16 w-16 rounded-full border border-emerald-400/20 bg-emerald-400/10" />
-          </div>
-          <div className="noise pointer-events-none absolute inset-0 opacity-[0.12]" />
-        </>
-      ) : (
-        <div className="absolute top-1/4 right-0 h-48 w-48 rounded-full bg-[#18704E]/25 blur-3xl" />
-      )}
-      <div className="absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/55" />
-    </div>
-  );
-}
 
 export default Hero;

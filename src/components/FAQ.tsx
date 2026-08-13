@@ -13,8 +13,8 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <Section id="faq">
-      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+    <Section id="faq" className="bg-white">
+      <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-20">
         <SectionHeading
           eyebrow="FAQ"
           title={
@@ -26,26 +26,19 @@ export default function FAQ() {
           description="Straight answers to the questions business owners ask most before booking a consultation."
         />
 
-        <div className="space-y-3">
+        <div className="divide-y divide-ink/10 border-y border-ink/10">
           {faqs.map((faq, i) => {
             const isOpen = open === i;
             return (
               <FadeIn key={faq.question} delay={i * 0.04}>
-                <div
-                  className={cn(
-                    "overflow-hidden rounded-[20px] border transition duration-300",
-                    isOpen
-                      ? "border-[#18704E]/25 bg-white shadow-[0_12px_40px_rgba(24,112,78,0.08)]"
-                      : "border-black/8 bg-[#FAFBFA] hover:border-black/15",
-                  )}
-                >
+                <div>
                   <button
                     type="button"
                     aria-expanded={isOpen}
                     onClick={() => setOpen(isOpen ? null : i)}
-                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/40 focus-visible:ring-inset"
+                    className="flex w-full items-center justify-between gap-4 py-5 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18704E]/40 focus-visible:ring-inset sm:py-6"
                   >
-                    <span className="font-monument text-sm font-bold tracking-tight text-black md:text-base">
+                    <span className="font-monument text-sm font-bold tracking-tight text-ink md:text-base">
                       {faq.question}
                     </span>
                     <span
@@ -53,7 +46,7 @@ export default function FAQ() {
                         "flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition",
                         isOpen
                           ? "bg-[#18704E] text-white"
-                          : "bg-black/5 text-black/50",
+                          : "bg-ink/5 text-ink/45",
                       )}
                     >
                       {isOpen ? (
@@ -71,7 +64,7 @@ export default function FAQ() {
                         exit={{ height: 0, opacity: 0 }}
                         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                       >
-                        <p className="px-6 pb-6 text-sm leading-relaxed text-black/55 md:text-[15px]">
+                        <p className="pb-6 text-sm leading-relaxed text-ink/55 md:text-[15px]">
                           {faq.answer}
                         </p>
                       </motion.div>

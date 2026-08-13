@@ -3,12 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {
-  Facebook,
-  Instagram,
-  Linkedin,
-  ArrowRight,
-} from "lucide-react";
+import { Facebook, Instagram, Linkedin, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { services } from "@/data/services";
 
@@ -38,13 +33,15 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative overflow-hidden border-t border-black/8 bg-[#050f0b] text-white">
-      <div className="pointer-events-none absolute inset-0 hidden md:block" aria-hidden>
-        <div className="absolute -top-24 left-1/4 h-64 w-64 rounded-full bg-[#18704E]/20 blur-[100px]" />
-        <div className="noise absolute inset-0 opacity-[0.1]" />
-      </div>
+    <footer className="relative overflow-hidden border-t border-white/10 bg-[#030a07] text-white">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-16 pb-8 sm:px-6 md:px-10 lg:px-12">
+        <div className="mb-14 max-w-2xl">
+          <p className="font-monument text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+            Let&apos;s build what{" "}
+            <span className="text-emerald-300">moves you forward.</span>
+          </p>
+        </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-12 pb-8 sm:px-5 sm:pt-16 sm:pb-10 md:px-10 lg:px-12">
         <div className="grid gap-10 sm:gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-10">
           <div className="lg:col-span-4">
             <Link href="/" className="inline-block">
@@ -53,12 +50,11 @@ export default function Footer() {
                 alt="Duoph Technologies"
                 width={120}
                 height={40}
-                className="h-10 w-auto brightness-0 invert"
+                className="h-9 w-auto brightness-0 invert"
               />
             </Link>
-            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/55">
-              Duoph Technologies helps businesses scale through websites,
-              software, branding, and digital marketing — with a focus on
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/50">
+              Websites, software, branding, and digital marketing — focused on
               revenue, efficiency, and long-term growth.
             </p>
             <div className="mt-6 flex gap-3">
@@ -81,7 +77,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="text-xs font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
               Services
             </p>
             <ul className="mt-5 space-y-3">
@@ -89,7 +85,7 @@ export default function Footer() {
                 <li key={s.id}>
                   <Link
                     href="#services"
-                    className="text-sm text-white/55 transition hover:text-white"
+                    className="text-sm text-white/50 transition hover:text-white"
                   >
                     {s.title}
                   </Link>
@@ -99,7 +95,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="text-xs font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
               Resources
             </p>
             <ul className="mt-5 space-y-3">
@@ -107,7 +103,7 @@ export default function Footer() {
                 <li key={l.href}>
                   <Link
                     href={l.href}
-                    className="text-sm text-white/55 transition hover:text-white"
+                    className="text-sm text-white/50 transition hover:text-white"
                   >
                     {l.label}
                   </Link>
@@ -117,7 +113,7 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="text-xs font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
               Company
             </p>
             <ul className="mt-5 space-y-3">
@@ -125,7 +121,7 @@ export default function Footer() {
                 <li key={l.label}>
                   <Link
                     href={l.href}
-                    className="text-sm text-white/55 transition hover:text-white"
+                    className="text-sm text-white/50 transition hover:text-white"
                   >
                     {l.label}
                   </Link>
@@ -135,10 +131,10 @@ export default function Footer() {
           </div>
 
           <div className="lg:col-span-2">
-            <p className="text-xs font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
+            <p className="text-[11px] font-semibold tracking-[0.18em] text-emerald-300/80 uppercase">
               Newsletter
             </p>
-            <p className="mt-5 text-sm text-white/50">
+            <p className="mt-5 text-sm text-white/45">
               Occasional updates on digital growth — no spam.
             </p>
             <form onSubmit={onNewsletter} className="mt-4">
@@ -173,11 +169,11 @@ export default function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row sm:items-center">
-          <p className="text-sm text-white/40">
+          <p className="text-sm text-white/35">
             © {new Date().getFullYear()} Duoph Technologies. All rights
             reserved.
           </p>
-          <p className="text-sm text-white/35">
+          <p className="text-sm text-white/30">
             Serving India, UAE, Saudi Arabia, Germany & the UK
           </p>
         </div>
@@ -201,7 +197,7 @@ function SocialLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition hover:border-emerald-400/40 hover:bg-white/5 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400/50"
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/65 transition hover:border-emerald-400/40 hover:bg-white/5 hover:text-white"
     >
       <Icon className="h-4 w-4" />
     </a>
