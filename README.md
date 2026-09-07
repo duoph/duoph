@@ -1,36 +1,115 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Duoph Technologies
 
-## Getting Started
+### Transforming Ideas into Impact.
 
-First, run the development server:
+Duoph Technologies is a software and technology company focused on building modern digital products, scalable business software, and high-performance web and mobile experiences.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+We combine thoughtful design, modern engineering, and practical business thinking to turn ideas into reliable digital solutions.
+
+---
+
+## What We Build
+
+🌐 **Web Applications**
+Modern, responsive, and scalable websites and web platforms built for performance.
+
+📱 **Mobile Applications**
+Cross-platform mobile experiences designed around usability and real-world business needs.
+
+⚙️ **Custom Software**
+Purpose-built software solutions tailored to unique workflows and operational requirements.
+
+🏢 **ERP Systems**
+Flexible enterprise resource planning solutions for managing and automating business operations.
+
+📊 **CRM Platforms**
+Customer management systems that help businesses organize leads, customers, communication, and sales.
+
+🛒 **POS & Commerce Solutions**
+Digital solutions for sales, inventory, orders, billing, and business management.
+
+🚀 **SaaS Products**
+We design and develop scalable software products that solve practical problems for businesses.
+
+---
+
+## Our Technology Stack
+
+### Frontend
+
+`Next.js` · `React` · `TypeScript` · `JavaScript` · `Tailwind CSS`
+
+### Backend
+
+`Node.js` · `Express.js` · `REST APIs`
+
+### Database & Infrastructure
+
+`MongoDB` · `PostgreSQL` · `Supabase` · `Firebase`
+
+### Mobile
+
+`React Native`
+
+### Tools & Deployment
+
+`Git` · `GitHub` · `Vercel` · `Docker` · `Figma`
+
+---
+
+## How We Build
+
+We focus on:
+
+* Clean and maintainable architecture
+* Modern UI/UX
+* Performance and scalability
+* Secure application development
+* Reusable and modular systems
+* Business-focused automation
+* Long-term product maintainability
+
+Our goal isn't simply to ship software — it's to build technology that remains useful as businesses grow.
+
+---
+
+## Our Work
+
+Our repositories include internal tools, SaaS products, client solutions, experiments, reusable components, APIs, and open-source projects developed by the Duoph team.
+
+```text
+Idea
+  ↓
+Research & Strategy
+  ↓
+UI/UX Design
+  ↓
+Engineering
+  ↓
+Testing
+  ↓
+Deployment
+  ↓
+Scale
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Building With Duoph
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Have a product idea, business problem, or ambitious software project?
 
-## Learn More
+We're interested in building products that create measurable impact.
 
-To learn more about Next.js, take a look at the following resources:
+**Duoph Technologies**
+*Transforming Ideas into Impact.*
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<p align="center">
+  <strong>Design. Develop. Deploy. Scale.</strong>
+</p>
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<p align="center">
+  Built with ❤️ by the Duoph Technologies team.
+</p>
