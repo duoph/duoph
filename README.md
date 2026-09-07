@@ -105,40 +105,6 @@ Scalable software products designed to solve practical problems for modern busin
 
 ---
 
-## How We Build
-
-<div align="center">
-
-```text
-💡 Idea
-   ↓
-🔍 Research & Strategy
-   ↓
-🎨 UI / UX Design
-   ↓
-⚡ Development
-   ↓
-🧪 Testing
-   ↓
-🚀 Deployment
-   ↓
-📈 Scale
-```
-
-</div>
-
-Our development philosophy focuses on:
-
-* Clean and maintainable architecture
-* Modern UI/UX
-* Performance and scalability
-* Secure application development
-* Reusable and modular systems
-* Business-focused automation
-* Long-term product maintainability
-
----
-
 ## Our Engineering Philosophy
 
 ```javascript
