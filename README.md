@@ -1,65 +1,133 @@
+<div align="center">
+
 # Duoph Technologies
 
-### Transforming Ideas into Impact.
+<img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=28&pause=1000&color=6C63FF&center=true&vCenter=true&width=750&lines=Transforming+Ideas+into+Impact.;Building+Modern+Digital+Products.;Engineering+Scalable+Business+Solutions.;Design.+Develop.+Deploy.+Scale." alt="Typing SVG" />
 
-Duoph Technologies is a software and technology company focused on building modern digital products, scalable business software, and high-performance web and mobile experiences.
+<br/>
 
-We combine thoughtful design, modern engineering, and practical business thinking to turn ideas into reliable digital solutions.
+**Software · SaaS · Web · Mobile · ERP · CRM · Digital Products**
+
+<br/>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&height=100&section=header&color=gradient" width="100%" />
+
+</div>
+
+---
+
+## About Duoph
+
+**Duoph Technologies** is a software and technology company focused on building modern digital products, scalable business software, and high-performance web and mobile experiences.
+
+We combine thoughtful design, modern engineering, and practical business thinking to transform ideas into reliable digital solutions.
 
 ---
 
 ## What We Build
 
-🌐 **Web Applications**
-Modern, responsive, and scalable websites and web platforms built for performance.
+<table>
+<tr>
+<td width="50%" valign="top">
 
-📱 **Mobile Applications**
-Cross-platform mobile experiences designed around usability and real-world business needs.
+### 🌐 Web Applications
 
-⚙️ **Custom Software**
-Purpose-built software solutions tailored to unique workflows and operational requirements.
+Modern, responsive, scalable websites and web platforms built for speed, usability, and performance.
 
-🏢 **ERP Systems**
-Flexible enterprise resource planning solutions for managing and automating business operations.
+</td>
+<td width="50%" valign="top">
 
-📊 **CRM Platforms**
-Customer management systems that help businesses organize leads, customers, communication, and sales.
+### 📱 Mobile Applications
 
-🛒 **POS & Commerce Solutions**
-Digital solutions for sales, inventory, orders, billing, and business management.
+Cross-platform mobile applications designed around smooth user experiences and real business requirements.
 
-🚀 **SaaS Products**
-We design and develop scalable software products that solve practical problems for businesses.
+</td>
+</tr>
+
+<tr>
+<td width="50%" valign="top">
+
+### ⚙️ Custom Software
+
+Purpose-built software solutions designed around unique business workflows and operational requirements.
+
+</td>
+<td width="50%" valign="top">
+
+### 🏢 ERP Systems
+
+Flexible ERP platforms for managing operations, employees, finance, inventory, projects, and business processes.
+
+</td>
+</tr>
+
+<tr>
+<td width="50%" valign="top">
+
+### 📊 CRM Platforms
+
+Customer management platforms for handling leads, customers, sales pipelines, follow-ups, and communication.
+
+</td>
+<td width="50%" valign="top">
+
+### 🚀 SaaS Products
+
+Scalable software products designed to solve practical problems for modern businesses.
+
+</td>
+</tr>
+</table>
 
 ---
 
-## Our Technology Stack
+## Technology Stack
+
+<div align="center">
 
 ### Frontend
 
-`Next.js` · `React` · `TypeScript` · `JavaScript` · `Tailwind CSS`
+<img src="https://skillicons.dev/icons?i=nextjs,react,typescript,javascript,tailwind,html,css" />
 
-### Backend
+<br/><br/>
 
-`Node.js` · `Express.js` · `REST APIs`
+### Backend & Database
 
-### Database & Infrastructure
+<img src="https://skillicons.dev/icons?i=nodejs,express,mongodb,postgres,supabase,firebase" />
 
-`MongoDB` · `PostgreSQL` · `Supabase` · `Firebase`
+<br/><br/>
 
-### Mobile
+### Mobile, Design & DevOps
 
-`React Native`
+<img src="https://skillicons.dev/icons?i=react,figma,docker,git,github,vercel" />
 
-### Tools & Deployment
-
-`Git` · `GitHub` · `Vercel` · `Docker` · `Figma`
+</div>
 
 ---
 
 ## How We Build
 
-We focus on:
+<div align="center">
+
+```text
+💡 Idea
+   ↓
+🔍 Research & Strategy
+   ↓
+🎨 UI / UX Design
+   ↓
+⚡ Development
+   ↓
+🧪 Testing
+   ↓
+🚀 Deployment
+   ↓
+📈 Scale
+```
+
+</div>
+
+Our development philosophy focuses on:
 
 * Clean and maintainable architecture
 * Modern UI/UX
@@ -69,47 +137,73 @@ We focus on:
 * Business-focused automation
 * Long-term product maintainability
 
-Our goal isn't simply to ship software — it's to build technology that remains useful as businesses grow.
-
 ---
 
-## Our Work
+## Our Engineering Philosophy
 
-Our repositories include internal tools, SaaS products, client solutions, experiments, reusable components, APIs, and open-source projects developed by the Duoph team.
+```javascript
+const duoph = {
+  mission: "Transforming Ideas into Impact",
 
-```text
-Idea
-  ↓
-Research & Strategy
-  ↓
-UI/UX Design
-  ↓
-Engineering
-  ↓
-Testing
-  ↓
-Deployment
-  ↓
-Scale
+  approach: [
+    "Think",
+    "Design",
+    "Build",
+    "Test",
+    "Deploy",
+    "Scale"
+  ],
+
+  focus: "Technology that creates real business value",
+
+  status: "Building the future..."
+};
 ```
 
 ---
 
-## Building With Duoph
+## Development Activity
 
-Have a product idea, business problem, or ambitious software project?
+<div align="center">
 
-We're interested in building products that create measurable impact.
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=YOUR_GITHUB_USERNAME&theme=github-compact&hide_border=true&area=true" width="100%" />
 
-**Duoph Technologies**
-*Transforming Ideas into Impact.*
+</div>
+
+> Replace `YOUR_GITHUB_USERNAME` with the GitHub username you want to display activity for.
 
 ---
 
-<p align="center">
-  <strong>Design. Develop. Deploy. Scale.</strong>
-</p>
+## Currently Building
 
-<p align="center">
-  Built with ❤️ by the Duoph Technologies team.
-</p>
+<div align="center">
+
+<img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&size=18&pause=900&color=36BCF7&center=true&vCenter=true&width=750&lines=Building+scalable+SaaS+products...;Developing+business+automation+platforms...;Creating+modern+digital+experiences...;Turning+ideas+into+production-ready+software..." />
+
+</div>
+
+---
+
+## Build With Duoph
+
+Have a product idea, business problem, or ambitious software project?
+
+We build technology designed to move businesses forward.
+
+<div align="center">
+
+### Duoph Technologies
+
+**Transforming Ideas into Impact.**
+
+<br/>
+
+<img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=20&pause=800&color=6C63FF&center=true&width=550&lines=Design.;Develop.;Deploy.;Scale." />
+
+<br/><br/>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&height=100&section=footer&color=gradient" width="100%" />
+
+**Built with ❤️ by the Duoph Technologies team.**
+
+</div>
