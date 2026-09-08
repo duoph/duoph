@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   ArrowDown,
+  ArrowLeft,
   ArrowRight,
   ArrowUpRight,
   Plus,
@@ -40,6 +41,24 @@ function SectionLabel({
 }
 
 export default function StudioSite() {
+  const gallery = useRef<HTMLDivElement>(null);
+  const [galleryPosition, setGalleryPosition] = useState({ start: true, end: false });
+  const scrollGallery = (direction: number) => {
+    const rail = gallery.current;
+    if (!rail) return;
+    const card = rail.querySelector<HTMLElement>(".project-card");
+    rail.scrollBy({ left: direction * ((card?.offsetWidth ?? rail.clientWidth) + 28), behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth" });
+  };
+  useEffect(() => {
+    const rail = gallery.current;
+    if (!rail) return;
+    const update = () => setGalleryPosition({ start: rail.scrollLeft < 5, end: rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 5 });
+    update();
+    rail.addEventListener("scroll", update, { passive: true });
+    const resize = new ResizeObserver(update);
+    resize.observe(rail);
+    return () => { rail.removeEventListener("scroll", update); resize.disconnect(); };
+  }, []);
   const [menuOpen, setMenuOpen] = useState(false);
   const [quote, setQuote] = useState(0);
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -57,6 +76,7 @@ export default function StudioSite() {
 
   return (
     <div className="studio-site" id="top">
+      <div className="reading-progress" aria-hidden="true" />
       <a className="skip-link" href="#work">
         Skip to content
       </a>
@@ -135,11 +155,11 @@ export default function StudioSite() {
           <div className="hero-main">
             <div className="hero-copy">
               <h1 id="hero-title">
-                Good thinking.
+                Big ideas.
                 <br />
-                Great design.
+                Better digital.
                 <br />
-                <span>Real impact.</span>
+                <span>Built together.</span>
               </h1>
               <p>
                 We build websites, software, and brands that move your business
@@ -157,9 +177,18 @@ export default function StudioSite() {
             <div className="hero-art" aria-hidden="true">
               <div className="art-grid" />
               <span className="art-caption">THINK / DESIGN / BUILD</span>
-              <div className="duoph-sculpture">
-                <div className="sculpture-loop loop-one" />
-                <div className="sculpture-loop loop-two" />
+              <div className="sculpture-shadow" />
+              <div className="architecture-sculpture">
+                {[0, 1, 2, 3, 4].map((layer) => (
+                  <div className={`sculpture-slab slab-${layer}`} key={layer}>
+                    <span className="slab-face slab-top"><span className="slab-inlay" /></span>
+                    <span className="slab-face slab-bottom" />
+                    <span className="slab-face slab-front" />
+                    <span className="slab-face slab-back" />
+                    <span className="slab-face slab-left" />
+                    <span className="slab-face slab-right" />
+                  </div>
+                ))}
               </div>
               <div className="art-footer">
                 <span>
@@ -245,8 +274,18 @@ export default function StudioSite() {
               real.
             </p>
           </div>
-          <div className="featured-grid">
-            {projects.slice(0, 2).map((project, index) => (
+          <div className="gallery-toolbar">
+            <span>Explore the projects <ArrowRight size={16} /> <span className="gallery-hint">Swipe or use the arrows</span></span>
+            <div className="gallery-buttons">
+              <button aria-label="Previous projects" aria-controls="project-gallery" disabled={galleryPosition.start} onClick={() => scrollGallery(-1)}><ArrowLeft size={20} /></button>
+              <button aria-label="Next projects" aria-controls="project-gallery" disabled={galleryPosition.end} onClick={() => scrollGallery(1)}><ArrowRight size={20} /></button>
+            </div>
+          </div>
+          <div className="featured-grid project-gallery" id="project-gallery" ref={gallery} role="region" aria-label="Selected projects, horizontally scrollable" tabIndex={0} onKeyDown={(event) => {
+            if (event.target !== event.currentTarget) return;
+            if (event.key === "ArrowRight" || event.key === "ArrowLeft") { event.preventDefault(); scrollGallery(event.key === "ArrowRight" ? 1 : -1); }
+          }}>
+            {projects.slice(0, 5).map((project, index) => (
               <article className="project-card" key={project.id}>
                 <a
                   className={`project-art project-art-${project.id}`}
@@ -268,7 +307,7 @@ export default function StudioSite() {
                       </strong>
                       <span className="product-wordmark">productshare®</span>
                     </div>
-                  ) : (
+                  ) : index === 1 ? (
                     <div className="seafood-art">
                       <span className="seafood-line" />
                       <span className="seafood-subtitle">
@@ -277,6 +316,12 @@ export default function StudioSite() {
                       <strong>marhaba</strong>
                       <span className="seafood-caption">S E A F O O D</span>
                       <span className="seafood-line bottom-line" />
+                    </div>
+                  ) : (
+                    <div className={`concept-art concept-${project.id}`}>
+                      <span className="concept-symbol" aria-hidden="true">{index === 2 ? "↗" : index === 3 ? "✳" : "◎"}</span>
+                      <strong>{project.name}</strong>
+                      <span>{project.industry}</span>
                     </div>
                   )}
                   <span className="project-art-note">Brand exploration</span>
@@ -296,27 +341,6 @@ export default function StudioSite() {
                 <p className="project-description">{project.description}</p>
                 <a className="text-link project-discuss" href="#contact">
                   Discuss similar work <ArrowUpRight size={14} />
-                </a>
-              </article>
-            ))}
-          </div>
-          <div className="more-projects">
-            {projects.slice(2, 5).map((project, index) => (
-              <article key={project.id}>
-                <span className="row-index">0{index + 3}</span>
-                <div>
-                  <h3>{project.name}</h3>
-                  <span className="small-meta">
-                    {project.industry} · {project.services.join(" / ")}
-                  </span>
-                  <p>{project.description}</p>
-                </div>
-                <a
-                  href="#contact"
-                  className="small-project-link"
-                  aria-label={`Discuss a project like ${project.name}`}
-                >
-                  <ArrowUpRight size={22} />
                 </a>
               </article>
             ))}

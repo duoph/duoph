@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import "lenis/dist/lenis.css";
 import "./studio.css";
 
 const siteUrl = "https://www.duoph.in";
