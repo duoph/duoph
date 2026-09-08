@@ -1,15 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Poppins } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/components/SmoothScroll";
-
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-poppins",
-  display: "swap",
-  preload: true,
-});
+import "./studio.css";
 
 const siteUrl = "https://www.duoph.in";
 const siteName = "Duoph Technologies";
@@ -119,10 +110,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={poppins.variable}>
-      <body className={`${poppins.className} antialiased`}>
-        <SmoothScroll>{children}</SmoothScroll>
-      </body>
+    <html lang="en">
+      <body>{children}</body>
     </html>
   );
 }
