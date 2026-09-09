@@ -41,7 +41,6 @@ export const companyStats = [
 ] as const;
 
 export const navLinks = [
-  { href: "#work", label: "Work" },
   { href: "#services", label: "Services" },
   { href: "#process", label: "Process" },
   { href: "#industries", label: "Industries" },

@@ -37,8 +37,8 @@ export default function Contact() {
     <section id="contact" className="contact-section section-space">
       <div className="shell two-column">
         <div className="contact-intro">
-          <p className="section-label">
-            <span>08</span>Let’s make it happen
+          <p className="eyebrow">
+            <span>06 / Contact</span>Let’s make it happen
           </p>
           <h2>
             Have something

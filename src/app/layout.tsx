@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
+import SmoothScroll from "@/components/SmoothScroll";
 import "lenis/dist/lenis.css";
 import "./studio.css";
 
@@ -112,7 +113,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body><SmoothScroll>{children}</SmoothScroll></body>
     </html>
   );
 }
