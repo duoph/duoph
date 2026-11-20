@@ -4,7 +4,7 @@ import { ArrowDown, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/data/site";
 import { SiteHeader, SiteFooter } from "@/components/SiteChrome";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = { 
   title: "Careers",
   description: "Join Duoph. Explore openings for Digital Marketing Intern, Digital Sales, and Frontend Developer.",
   alternates: { canonical: "/careers" },
