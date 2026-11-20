@@ -1,6 +1,7 @@
 import Image from "next/image";
 import ClientStrip from "@/components/home/ClientStrip";
 import HeroVideo from "@/components/home/HeroVideo";
+import ServicesTrack from "@/components/home/ServicesTrack";
 import { ArrowIcon, PillLink, SectionHead, Tag } from "@/components/home/ui";
 import { aboutPillars, differences, homeServices, products } from "@/data/home";
 import { faqs } from "@/data/faq";
@@ -41,7 +42,7 @@ export function Services() {
           intro="From your first digital presence to complex business solutions, we bring design, technology, and strategy together under one roof."
         />
       </div>
-      <ul className="dh-services__track" tabIndex={0} aria-label="Our services, scroll horizontally for more">
+      <ServicesTrack>
         {homeServices.map((service) => (
           <li key={service.id} className="dh-service" id={`service-${service.id}`}>
             <h3>
@@ -58,7 +59,7 @@ export function Services() {
             </div>
           </li>
         ))}
-      </ul>
+      </ServicesTrack>
     </section>
   );
 }

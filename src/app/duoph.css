@@ -1008,6 +1008,13 @@
   margin-top: 90px;
 }
 
+/* ---------- GSAP SplitText line masks ---------- */
+/* Headings use a tight line-height, so give each mask room for ascenders/descenders. */
+.dh-line-mask {
+  padding-block: 0.08em 0.16em;
+  margin-block: -0.08em -0.16em;
+}
+
 /* ---------- responsive ---------- */
 @media (max-width: 1400px) {
   .dh-diff {
