@@ -11,6 +11,8 @@ export const siteConfig = {
   whatsapp: "https://wa.me/919400244731",
   officeHours: "Mon – Sat, 9:00 AM – 7:00 PM IST",
   address: "India · Serving clients worldwide",
+  // From the Figma redesign. Confirm this is the real office before launch.
+  officeAddress: "2nd Floor, Horizon Business Centre, MG Road, Kochi, Kerala – 682016, India.",
   mapEmbed:
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d77.0!3d12.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDAwJzAwLjAiTiA3N8KwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1",
   social: {

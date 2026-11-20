@@ -1,8 +1,23 @@
 import type { Metadata, Viewport } from "next";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 import "lenis/dist/lenis.css";
 import "./studio.css";
+import "./duoph.css";
+
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-jakarta",
+  display: "swap",
+});
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["500", "600"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 const siteUrl = "https://www.duoph.in";
 const siteName = "Duoph Technologies";
@@ -112,7 +127,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${jakarta.variable} ${inter.variable}`}>
       <body><SmoothScroll>{children}</SmoothScroll></body>
     </html>
   );

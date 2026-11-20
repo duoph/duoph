@@ -1,32 +1,27 @@
 export const faqs = [
   {
-    question: "How much does a website cost?",
+    question: "What services does DUOPH provide?",
     answer:
-      "Most business websites start from a focused package based on pages, features, and integrations. Ecommerce, custom software, and multi-language builds are scoped separately. After a short consultation, we share a clear quote with no hidden fees.",
+      "We design and build websites, custom software (ERP, CRM, inventory, POS), mobile apps, brand identities, and UI/UX, and run digital marketing across SEO, Meta Ads, and Google Ads. You can start with one service or bring us in for the whole journey.",
   },
   {
-    question: "How long does development take?",
+    question: "How much does a project cost?",
     answer:
-      "A standard business website typically takes 3–6 weeks. Custom software, apps, and ERP systems take longer depending on complexity. We agree milestones upfront so you always know what's shipping next.",
+      "It depends on scope: the number of pages, features, and integrations. Ecommerce, custom software, and multi-language builds are scoped separately. After a short consultation, we share a clear quote with no hidden fees.",
   },
   {
-    question: "Can you redesign an existing website?",
+    question: "How long does a project take?",
     answer:
-      "Yes. We audit what you have, keep what works, and rebuild the parts that hurt conversion, speed, or trust. Many clients come to us specifically to modernise an outdated site without losing SEO equity.",
+      "A standard business website typically takes 3–6 weeks. Custom software, apps, and ERP systems take longer depending on complexity. We agree milestones upfront so you always know what's coming next.",
   },
   {
-    question: "Do you provide SEO?",
+    question: "Can you work with an existing website or application?",
     answer:
-      "Yes. Every site we build includes solid technical foundations. We also offer ongoing SEO — on-page optimisation, content, and local search — so you keep attracting qualified traffic after launch.",
+      "Yes. We review what you have, keep what works, and improve or rebuild the parts that hold you back, whether that's speed, design, features, or search visibility.",
   },
   {
-    question: "Do you build ERP software?",
+    question: "Do you provide ongoing support?",
     answer:
-      "Yes. We design and build custom ERP, CRM, inventory, and POS systems tailored to your workflows — not rigid off-the-shelf tools that force your team to change how they work.",
-  },
-  {
-    question: "Do you offer support?",
-    answer:
-      "Absolutely. We provide post-launch support, maintenance, and iterative improvements. Most clients stay with us as a long-term technology partner as their business grows.",
+      "Absolutely. We provide post-launch support, maintenance, and continuous improvements. Most clients stay with us as a long-term technology partner as their business grows.",
   },
 ] as const;

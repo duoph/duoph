@@ -174,13 +174,6 @@ html.lenis, html.lenis body { scroll-behavior: auto !important; }
 .service-includes li { border-radius: 5px; }
 .service-card:nth-child(2) { background: #e8efdf; border-color: #d1dec5; }
 .service-card:nth-child(2) .service-includes li, .service-card:nth-child(2) .service-card-top > svg { background: #f5f8ef; }
-#process { background: #173f30; --ink: #f1f5e9; --muted: #c3d1c5; --green: #d4e8a4; --line: #3b5d49; }
-#process h2, #process h3 { color: var(--ink); }
-#process p { color: var(--muted); }
-#process .eyebrow { color: var(--green) !important; }
-.process-grid article { border: 1px solid #42634d; border-radius: 16px; padding: 24px; background: #ffffff04; }
-.process-grid { gap: 16px; }
-.process-number { border-color: #42634d; font-family: "Manrope", sans-serif; font-size: 27px; }
 .values-list article { padding-left: 20px; border-left: 2px solid #bccf9a; }
 .faq-list summary { font-family: "Manrope", sans-serif; }
 .contact-form-wrap { padding: 32px; background: #fff; border: 1px solid var(--line); border-radius: 20px; box-shadow: 0 10px 40px #183b2405; }
